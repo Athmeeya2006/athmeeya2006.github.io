@@ -509,12 +509,10 @@
     }
     drawRadar();
 
-    // NAV SCROLL + SCROLL PROGRESS + BACK TO TOP (rAF-throttled for smoothness)
+    // NAV SCROLL + BACK TO TOP (rAF-throttled for smoothness)
     const navEl = document.getElementById('nav');
-    const scrollProgress = document.getElementById('scroll-progress');
     const backToTop = document.getElementById('back-to-top');
     let scrollTicking = false;
-    let smoothScrollProgress = 0;
     let lastActiveSection = 'hero';
     const navSectionMap = {
       hero: 'hero',
@@ -534,12 +532,6 @@
       
       // Smooth nav state
       navEl.classList.toggle('scrolled', sy > 60);
-      
-      // Smooth scroll progress with lerp
-      const docH = document.documentElement.scrollHeight - window.innerHeight;
-      const targetPct = docH > 0 ? (sy / docH) * 100 : 0;
-      smoothScrollProgress = lerp(smoothScrollProgress, targetPct, 0.3);
-      scrollProgress.style.width = smoothScrollProgress + '%';
       
       // back to top (smooth opacity via class)
       backToTop.classList.toggle('visible', sy > 500);

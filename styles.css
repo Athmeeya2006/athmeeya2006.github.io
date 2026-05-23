@@ -11,31 +11,6 @@
       --border-subtle: rgba(255, 255, 255, 0.04);
     }
 
-    /* SCROLL PROGRESS BAR */
-    #scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 10001;
-      width: 0%;
-      height: 3px;
-      background: linear-gradient(90deg, var(--cyan), var(--orange), var(--purple), var(--cyan));
-      background-size: 300% 100%;
-      animation: progressGradient 3s linear infinite;
-      transition: width .05s linear;
-      box-shadow: 0 0 12px var(--cyan), 0 0 30px rgba(0, 255, 229, .3);
-    }
-
-    @keyframes progressGradient {
-      0% {
-        background-position: 0% 50%
-      }
-
-      100% {
-        background-position: 300% 50%
-      }
-    }
-
     /* FILM GRAIN */
     #grain {
       position: fixed;

@@ -27,9 +27,6 @@
 
 <body>
 
-  <!-- SCROLL PROGRESS -->
-  <div id="scroll-progress"></div>
-
   <!-- FILM GRAIN -->
   <canvas id="grain"></canvas>
 
@@ -185,10 +182,9 @@
           <div class="exp-period">2026 - Present</div>
         </div>
         <div class="exp-right">
-          <div class="exp-meta">Complex Networks, Percolation Theory &amp; Dynamical Systems · Hyderabad, India</div>
+          <div class="exp-meta">Complex Networks, Dynamical Systems &amp; Phase Transitions · Hyderabad, India</div>
           <ul class="exp-bullets">
-            <li>Investigating the role of signed edge weights in structural balance theory and the conditions under which complex networks undergo irreversible dynamical phase transitions.</li>
-            <li>Developing mathematical models connecting percolation threshold behavior to large-scale connectivity collapse, with an upcoming research manuscript.</li>
+            <li>Investigating phase transitions in complex networks using signed Laplacian dynamics and structural balance theory; developing mathematical models of large-scale connectivity collapse.</li>
           </ul>
           <div class="exp-meta">Erdos-Renyi Random Graph Evaluation | Python, NetworkX, SciPy, Manim</div>
           <ul class="exp-bullets">
@@ -196,8 +192,13 @@
             <li>Empirically confirmed the s<sup>-3/2</sup> cluster-size power law at the percolation threshold, the critical point at which a sparse random network suddenly develops a giant connected component, directly analogous to phase transitions in statistical physics.</li>
             <li>Modeled and analyzed dynamical phase transitions across graph networks, culminating in an upcoming research manuscript.</li>
           </ul>
+          <div class="exp-meta">Explosive Synchronization and Flash Crash in Networked Oscillators | Python, C++17, SciPy, Matplotlib</div>
+          <ul class="exp-bullets">
+            <li>Rewrote the core ODE integrator from Python to a hand-tuned C++17 RK4 engine, achieving a 30x speedup that made full parameter sweeps tractable; scaled simulation capacity from N=50 to N=800 oscillators per ensemble.</li>
+            <li>Confirmed the theoretical critical coupling K<sub>c</sub> ≈ 1.5957 to within 2% accuracy using finite-size scaling across 525 simulations; modeled coherence collapse under sudden coupling reduction as a direct analogue to flash-crash dynamics.</li>
+          </ul>
           <div class="exp-tags">
-            <span>Python</span><span>NetworkX</span><span>SciPy</span><span>Manim</span><span>Percolation Theory</span><span>Dynamical Systems</span>
+            <span>Python</span><span>C++17</span><span>NetworkX</span><span>SciPy</span><span>Matplotlib</span><span>Manim</span><span>Dynamical Systems</span>
           </div>
         </div>
       </div>
@@ -402,82 +403,75 @@
           <div class="project-card reveal">
         <div class="project-card-corner"></div>
         <div class="project-num">01</div>
-        <div class="project-tag">Quant Benchmarking System</div>
-        <div class="project-title">FlowMax: Maximum Flow Algorithm Benchmarking Suite</div>
-        <div class="project-desc">Implemented and benchmarked 5 max-flow algorithms (Edmonds-Karp, Dinic's, Push-Relabel, Hopcroft-Karp, Boykov-Kolmogorov) across 21 datasets spanning 7 topology categories. Empirically validated O(V<sup>2</sup>E) vs O(VE<sup>2</sup>) behavior with case studies in airline scheduling, image segmentation, and optical fibre bandwidth optimization.</div>
+        <div class="project-tag">Research Systems</div>
+        <div class="project-title">Explosive Synchronization and Flash Crash in Networked Oscillators</div>
+        <div class="project-desc">A Python/C++17 simulation framework for phase transitions in coupled oscillator networks on Erdos-Renyi and Barabasi-Albert topologies. Rewrote the core integrator to achieve a 30x speedup, making large-scale parameter sweeps tractable for the first time. Recovered the theoretical critical coupling to within 2% accuracy; models flash-crash coherence collapse as a direct analogue to financial market dynamics.</div>
         <div class="project-tech">
-          <span>Python</span><span>NetworkX</span><span>Matplotlib</span><span>Benchmarking</span><span>Complexity Analysis</span>
+          <span>Python</span><span>C++17</span><span>SciPy</span><span>Matplotlib</span><span>pybind11</span>
         </div>
-        <a href="https://github.com/Athmeeya2006/Max-Flow" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
+        <a href="https://github.com/Athmeeya2006/Explosive-Sync-Flash-Crash" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
           </div>
 
           <div class="project-card reveal stagger-1">
         <div class="project-card-corner"></div>
         <div class="project-num">02</div>
         <div class="project-tag">Research Systems</div>
-        <div class="project-title">Erdos-Renyi Random Graph Evaluation</div>
-        <div class="project-desc">Research evaluation developed at the CCNSB lab for Erdos-Renyi random graphs. Simulates
-          graphs up to 10<sup>4</sup> nodes with 1,000+ Monte Carlo trials; benchmarks naive O(n<sup>2</sup>) vs Batagelj-Brandes linear-time
-          generation with empirical runtime curves; derives the s<sup>-3/2</sup> cluster-size power law at the percolation threshold, the critical point at which a sparse random network suddenly develops a giant connected component, directly analogous to phase transitions in statistical physics; and produces
-          Manim animations for research presentations.</div>
+        <div class="project-title">Erdos-Renyi Random Graph + Financial Contagion</div>
+        <div class="project-desc">Validated 3 classical phase-transition scaling laws through 10,980+ Monte Carlo simulations; implemented a fast graph generator achieving 1,000x faster generation than the naive approach. Extended the framework to financial contagion on interbank networks using Bond Percolation, Watts Threshold (2002), and DebtRank (2012) cascade models. Showed that S&amp;P 500 correlation structure deviates from a random graph null model by over 30 standard deviations, quantifying non-random risk concentration in financial markets.</div>
         <div class="project-tech">
           <span>Python</span><span>NetworkX</span><span>SciPy</span><span>NumPy</span><span>Matplotlib</span><span>Manim</span>
         </div>
-        <a href="https://github.com/Athmeeya2006/erdos-graph" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
+        <a href="https://github.com/Athmeeya2006/Erdos-Renyi-Contagion" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
           </div>
 
           <div class="project-card reveal stagger-2">
         <div class="project-card-corner"></div>
         <div class="project-num">03</div>
-        <div class="project-tag">Full-Stack Gamification Platform</div>
-        <div class="project-title">You Matter Wellness</div>
-        <div class="project-desc">Ranked 9th out of 100+ teams at the Star Union Dai-ichi Life Insurance National Tech Hackathon.
-          Built streak tracking, challenge systems, and community leaderboards with a decoupled microservice architecture.
-          Integrated React 18 + Framer Motion + Chart.js frontend with Express.js APIs and a Python/Flask ML service, deployed on Vercel and Railway.</div>
+        <div class="project-tag">Quant Systems</div>
+        <div class="project-title">No-Regret Market Making Engine</div>
+        <div class="project-desc">A C++17 limit order book with price-time priority, O(log N) insertion, OFI, and rolling realized volatility, with 15+ methods exposed to Python via pybind11. Benchmarks 6 market-making algorithms including Exp3 variants, a contextual bandit with 8-expert pool, and Avellaneda-Stoikov (2008) across 10,000-round simulations under adversarial and regime-shifting conditions. Exp3 variants stay below the theoretical O(sqrt(TK ln K)) regret bound across all market regimes; connects Nash equilibrium bluff frequencies to adverse selection spread via Glosten-Milgrom (1985).</div>
         <div class="project-tech">
-          <span>React.js</span><span>Express.js</span><span>Python</span><span>Flask</span><span>Framer Motion</span><span>Chart.js</span>
+          <span>C++17</span><span>Python</span><span>pybind11</span><span>CMake</span><span>NumPy</span><span>SciPy</span>
         </div>
-        <a href="https://github.com/Athmeeya2006/You-Matter-Wellness" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
+        <a href="https://github.com/Athmeeya2006/No-Regret-Market-Maker" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
           </div>
 
           <div class="project-card reveal stagger-3">
         <div class="project-card-corner"></div>
         <div class="project-num">04</div>
-        <div class="project-tag">Web Systems Tier</div>
-        <div class="project-title">Felicity Fest Management System</div>
-        <div class="project-desc">Built a 3-role (Participant, Organizer, Admin) MERN event management platform with 9 MongoDB
-          models and 70+ REST endpoints. Implemented Socket.IO real-time forum and team chat,
-          browser-camera QR attendance, and merchandise payment approval workflow with file uploads.
-          Added JWT/bcrypt auth with role-based route guards, anonymous feedback, CSV attendance
-          export, iCal integration, and fuzzy event search. Deployed on Vercel and Render with MongoDB Atlas.</div>
+        <div class="project-tag">Quant Systems</div>
+        <div class="project-title">GTO Poker Bot</div>
+        <div class="project-desc">Implements 4 CFR-family solvers (Vanilla CFR, CFR+, DCFR, External Sampling MCCFR) across a 24x game-tree range from Kuhn Poker (12 info sets) to Leduc Poker (288 info sets). The best solver reaches near-Nash play with exploitability under 0.001 chips/game, verified against the closed-form analytical solution. Includes a real-time Bayesian opponent model that detects Nash deviations via sequential hypothesis testing and shifts strategy smoothly from GTO toward exploitative as confidence grows. A Glosten-Milgrom (1985) module maps Nash equilibrium output directly to market spread and position sizing signals.</div>
         <div class="project-tech">
-          <span>React 18</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>Socket.IO</span><span>JWT</span>
+          <span>Python</span><span>CFR</span><span>Bayesian Inference</span><span>NumPy</span><span>SciPy</span><span>pytest</span>
         </div>
-        <a href="https://github.com/Athmeeya2006/Felicity-Fest-Management-System" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
+        <a href="https://github.com/Athmeeya2006/GTO_Poker_Bot" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
           </div>
 
           <div class="project-card reveal stagger-4">
         <div class="project-card-corner"></div>
         <div class="project-num">05</div>
-        <div class="project-tag">Web Systems Tier</div>
-        <div class="project-title">Partner Engagement Dashboard</div>
-        <div class="project-desc">Engineered for SVP India, commissioned by Mr. Raja Poladi (Head of CDITH, IIIT Hyderabad). Architected a normalized relational schema across 12 tables handling partner lifecycle, event tracking, and engagement analytics. Designed 60+ REST API endpoints, secured via JWT/bcrypt authentication.</div>
+        <div class="project-tag">Full-Stack Systems</div>
+        <div class="project-badge">9th / 100+ Teams, Star Union Dai-ichi National Hackathon</div>
+        <div class="project-title">YouMatter Wellness Platform</div>
+        <div class="project-desc">A full-stack gamified wellness platform that maps personal health across 5 dimensions (mind, body, social, financial, purpose) as an interconnected node graph; completing activity in one dimension propagates a ripple effect to connected dimensions. Built for the Star Union Dai-ichi Life Insurance National Hackathon. Dual ML forecasting pipeline: server-side Facebook Prophet (90-day training, 7-day prediction) with a client-side TF.js linear regression fallback so the analytics dashboard is never blank. Behavioral design layer applies loss-aversion decay mechanics, endowed progress, and variable reward schedules directly to retention.</div>
         <div class="project-tech">
-          <span>React.js</span><span>TypeScript</span><span>Express.js</span><span>Prisma ORM</span><span>PostgreSQL</span><span>JWT/bcrypt</span>
+          <span>React 19</span><span>Vite</span><span>Node.js</span><span>Express.js</span><span>Python</span><span>Flask</span><span>Facebook Prophet</span><span>TensorFlow.js</span><span>Chart.js</span><span>Framer Motion</span>
         </div>
+        <a href="https://github.com/Athmeeya2006/You-Matter-Wellness" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
           </div>
 
-          <div class="project-card project-card--minor reveal stagger-5">
+          <div class="project-card reveal stagger-5">
         <div class="project-card-corner"></div>
         <div class="project-num">06</div>
-        <div class="project-tag">Research Systems</div>
-        <div class="project-badge">IN PROGRESS - June 2026</div>
-        <div class="project-title">Financial Contagion Network Model</div>
-        <div class="project-desc">Modeling systemic risk propagation in financial networks using percolation theory. Extending the Erdos-Renyi framework to simulate cascade failure across interconnected nodes.</div>
+        <div class="project-tag">Full-Stack Systems</div>
+        <div class="project-title">Felicity Fest Management System</div>
+        <div class="project-desc">A 3-role (Participant, Organizer, Admin) MERN platform for college fest management with 9 MongoDB models and 70+ REST endpoints. Organizers scan QR codes directly from any browser camera for live attendance tracking. Includes Socket.IO real-time forum with emoji reactions and moderation, Socket.IO team chat with persistent history, a merchandise payment approval workflow with Multer file uploads, anonymous feedback via SHA-256 hashing (identity never stored), and calendar export to iCal, Google Calendar, and Outlook. JWT/bcrypt auth with discriminator-based role inheritance.</div>
         <div class="project-tech">
-          <span>Python</span><span>NetworkX</span><span>Percolation Theory</span><span>Statistical Physics</span>
+          <span>React 18</span><span>Node.js</span><span>Express.js</span><span>MongoDB</span><span>Mongoose</span><span>Socket.IO</span><span>JWT</span><span>Multer</span><span>Facebook Prophet</span>
         </div>
-        </div>
+        <a href="https://github.com/Athmeeya2006/Felicity-Fest-Management-System" target="_blank" rel="noopener noreferrer" class="project-link">View Code →</a>
+          </div>
     </div>
   </section>
 
