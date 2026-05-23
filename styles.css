@@ -690,7 +690,7 @@
       background: var(--cyan);
       padding: 16px 40px;
       border: none;
-      cursor: none;
+      cursor: pointer;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -728,7 +728,8 @@
 
     .btn-secondary {
       font-family: 'Space Mono', monospace;
-      font-size: 11px;
+      font-size: 13px;
+      font-weight: 700;
       letter-spacing: 3px;
       color: var(--orange);
       border: 1px solid rgba(255, 69, 0, .4);
@@ -1652,7 +1653,7 @@
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(255, 255, 255, .05);
-      cursor: none;
+      cursor: default;
       transition: border-color .5s ease, transform .5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .5s ease;
       will-change: transform;
     }
@@ -1739,7 +1740,7 @@
       transition: all .3s;
       align-self: flex-start;
       background: rgba(0, 255, 229, .05);
-      cursor: none;
+      cursor: pointer;
     }
 
     .verify-badge:hover {
@@ -1961,7 +1962,7 @@
       position: relative;
       overflow: hidden;
       clip-path: polygon(0 0, 100% 0, 100% 90%, 95% 100%, 0 100%);
-      cursor: none;
+      cursor: default;
     }
 
     .mang-card img {
@@ -2410,7 +2411,7 @@
       background: var(--cyan);
       padding: 10px 22px;
       border: none;
-      cursor: none;
+      cursor: pointer;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
@@ -2597,7 +2598,7 @@
       flex-direction: column;
       justify-content: flex-end;
       transition: border-color .5s ease, transform .5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .5s ease;
-      cursor: none;
+      cursor: default;
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
       will-change: transform;
@@ -2787,7 +2788,7 @@
       border: 1px solid var(--orange);
       color: var(--orange);
       padding: 16px 32px;
-      cursor: none;
+      cursor: pointer;
       display: inline-block;
       text-decoration: none;
       transition: all .4s cubic-bezier(0.34, 1.56, 0.64, 1);

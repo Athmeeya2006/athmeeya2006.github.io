@@ -454,8 +454,8 @@
     let smoothRadarAngle = 0;
     const blips = [
       { angle: 0.8, dist: .6, label: 'IIIT HYD' },
-
-      { angle: 4.5, dist: .75, label: 'CODEFORCES' },
+      { angle: 2.1, dist: .45, label: 'INMO' },
+      { angle: 4.5, dist: .75, label: 'BIKES' },
       { angle: 3.2, dist: .5, label: 'SGFI' },
     ];
     function drawRadar() {
