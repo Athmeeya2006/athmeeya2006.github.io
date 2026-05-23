@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Flash Crash Dynamics in Networked Oscillators. High performance simulation framework for phase transitions in coupled oscillator networks. C++17 engine with 30x speedup.">
+  <title>Flash Crash Dynamics | Athmeeya M Kashyap</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project-detail.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="detail-nav">
+    <a href="../index.html#projects" class="nav-logo">AMK</a>
+    <a href="../index.html#projects" class="back-link"><span class="arrow">&larr;</span> BACK TO PROJECTS</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="detail-hero">
+    <div class="detail-hero-inner">
+      <div class="detail-tags">
+        <span class="detail-tag">Research</span>
+        <span class="detail-tag">Python</span>
+        <span class="detail-tag">C++17</span>
+        <span class="detail-tag">Dynamical Systems</span>
+        <span class="detail-tag">Phase Transitions</span>
+      </div>
+      <h1 class="detail-title">FLASH CRASH DYNAMICS IN NETWORKED OSCILLATORS</h1>
+      <div class="detail-subtitle">CCNSB Lab, IIIT Hyderabad &middot; Advisor: Prof. Chittaranjan Hens</div>
+      <div class="detail-links">
+        <a href="https://github.com/Athmeeya2006/Explosive-Sync-Flash-Crash" target="_blank" rel="noopener noreferrer"
+          class="detail-btn detail-btn-primary">VIEW CODE &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="detail-content">
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">What This Is</h2>
+      <p>This is a high performance simulation framework. It studies how networks of coupled oscillators undergo abrupt and irreversible phase transitions. It explores their connection to financial flash crashes.</p>
+      <p>The central question asks what mechanism drives financial markets to lose synchrony catastrophically and recover within minutes. This project formalizes that question in the language of dynamical systems. A market in synchronized coordination acts as a network of Kuramoto or Stuart Landau oscillators. A flash crash acts as an abrupt coupling drop. 88 percent liquidity withdrawal translates to coupling dropping from 2.5 to 0.3. The question becomes whether the system recovers coherence and how fast.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">The Problem With Python</h2>
+      <p>The first version of this framework ran entirely in Python using SciPy. It used an adaptive RK45 integrator. A single simulation of 400 oscillators over 50 time units took 4.5 seconds. A full parameter sweep over 5 system sizes and 21 coupling values would take roughly 40 minutes.</p>
+      <p>That is not a research workflow. You cannot iterate on hypotheses when every experiment costs 40 minutes.</p>
+      <p>I rewrote the core ODE integration loop in C++17 with a fixed step RK4 engine operating on sparse adjacency lists. Wall clock time for the same simulation dropped to 0.15 seconds. This is a 30x speedup. The full parameter sweep now completes in about 80 seconds.</p>
+      <p>The key implementation choice was the data structure. Storing a dense adjacency matrix wastes 95 percent of memory and causes cache misses. Sparse adjacency lists reduce memory and access time from quadratic to linear.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Two Models, Two Network Topologies</h2>
+      <p>Kuramoto oscillators track only the phase of each oscillator. The coupling term pulls phases toward alignment. The order parameter measures global coherence where 0 means incoherent and 1 means fully synchronized.</p>
+      <p>Stuart Landau oscillators track complex amplitude alongside phase. They capture richer dynamics including amplitude death and oscillation quenching. These have no analogue in the Kuramoto model.</p>
+      <p>Erdos and Renyi networks have a Poisson degree distribution where most nodes have similar connectivity. Barabasi and Albert networks grow by preferential attachment. This produces a power law degree distribution with highly connected hubs.</p>
+      <p>The two topologies respond very differently to coupling drops. Coherence collapses gradually on ER networks because there are no hubs to anchor synchrony. Hubs maintain partial coherence longer on BA networks. The collapse is faster and more total when they fail.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Explosive Synchronization and Hysteresis</h2>
+      <p>The Kuramoto transition is continuous on homogeneous networks. The order parameter increases smoothly as coupling increases past the critical value. The transition becomes discontinuous and exhibits hysteresis on heterogeneous networks with frequency degree correlation.</p>
+      <p>Hysteresis means the critical coupling for the forward transition differs from the backward transition. The system remembers its previous state. This directly analogues market regime changes that do not simply reverse when original conditions return.</p>
+      <p>The hysteresis sweep module runs forward and backward coupling ramps. It measures the width of the bistable region where both states are stable simultaneously.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Recovering the Critical Coupling</h2>
+      <p>Mean field theory predicts the critical coupling exactly for the Kuramoto model on fully connected networks. Every oscillator draws its natural frequency from a Lorentzian distribution. This closed form result follows from a self consistency equation on the order parameter.</p>
+      <p>The finite size scaling analysis ran 525 simulations across 5 system sizes and 21 coupling values. The empirical steady state order parameter converged to within 2 percent of the theoretical value. The phase diagram heatmap shows a sharp transition boundary that locates the critical coupling precisely.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Early Warning Signals</h2>
+      <p>There are measurable precursors before a synchronized network loses coherence. Rolling variance and autocorrelation both increase in the window leading up to the phase transition. This phenomenon is called critical slowing down. The system responds more sluggishly to small perturbations as it approaches the critical point.</p>
+      <p>Market microstructure researchers observe analogous precursors before flash crashes. Order flow imbalance diverges and bid ask spreads widen. Price impact per unit volume increases. The early warning analysis module computes both indicators over a sliding window and plots them against the order parameter trajectory.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Lyapunov Stability Analysis</h2>
+      <p>The framework implements the Benettin variational algorithm for computing the largest Lyapunov exponent across coupling sweeps. A positive exponent indicates chaotic dynamics. A zero or negative exponent indicates stable or periodic behavior.</p>
+      <p>The exponent transitions from negative toward zero at the transition point. It becomes positive in the chaotic intermediate regime before returning to negative in the fully synchronized state. This provides a dynamical systems diagnostic independent of the order parameter.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Test Coverage and CI</h2>
+      <p>27 unit tests across 3 modules achieve 95 percent line coverage. The test suite covers network generation symmetry, integration correctness, and order parameter bounds. It verifies data saving fidelity and end to end execution of all analysis and plot scripts.</p>
+      <p>Continuous integration runs on every push via GitHub Actions. Python jobs test against multiple versions with ruff linting and mypy type checking. A separate C++ job builds the command line tool from source and runs a deterministic smoke test.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Technical Stack</h2>
+      <div class="detail-stack">
+        <span>Python</span>
+        <span>C++17</span>
+        <span>CMake</span>
+        <span>SciPy</span>
+        <span>NumPy</span>
+        <span>Matplotlib</span>
+        <span>NetworkX</span>
+        <span>pytest</span>
+        <span>mypy</span>
+        <span>ruff</span>
+        <span>GitHub Actions</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="detail-footer">
+    <div>&copy; 2026 ATHMEEYA M KASHYAP</div>
+    <a href="../index.html#projects">&larr; ALL PROJECTS</a>
+  </footer>
+
+  <script src="project-detail.js"></script>
+</body>
+
+</html>

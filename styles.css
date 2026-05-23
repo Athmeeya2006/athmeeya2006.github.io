@@ -1477,6 +1477,14 @@
       letter-spacing: 1px;
     }
 
+    .edu-coursework {
+      font-size: 13px;
+      color: rgba(234, 234, 234, .55);
+      margin-top: 10px;
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+    }
+
     .edu-xp {
       margin-top: 12px;
       height: 3px;
@@ -2415,6 +2423,23 @@
     .project-link:hover {
       opacity: 1;
       gap: 12px;
+    }
+
+    .project-card-links {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .project-link-detail {
+      color: var(--orange);
+      opacity: .8;
+    }
+
+    .project-link-detail:hover {
+      color: var(--orange);
+      opacity: 1;
     }
 
     /* FOOTER */

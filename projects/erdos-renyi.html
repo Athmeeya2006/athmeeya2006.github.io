@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Erdos and Renyi Random Graph Evaluation and Financial Contagion. Large scale Monte Carlo study validates 3 classical scaling laws through 10,980 simulations. Models financial contagion on interbank networks.">
+  <title>Erdos-Renyi + Financial Contagion | Athmeeya M Kashyap</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project-detail.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="detail-nav">
+    <a href="../index.html#projects" class="nav-logo">AMK</a>
+    <a href="../index.html#projects" class="back-link"><span class="arrow">&larr;</span> BACK TO PROJECTS</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="detail-hero">
+    <div class="detail-hero-inner">
+      <div class="detail-tags">
+        <span class="detail-tag">Research</span>
+        <span class="detail-tag">Python</span>
+        <span class="detail-tag">Network Science</span>
+        <span class="detail-tag">Monte Carlo</span>
+        <span class="detail-tag">Financial Systems</span>
+      </div>
+      <h1 class="detail-title">Erdos and Renyi Random Graph and Financial Contagion</h1>
+      <div class="detail-subtitle">CCNSB Lab, IIIT Hyderabad</div>
+      <div class="detail-links">
+        <a href="https://github.com/Athmeeya2006/Erdos-Renyi-Contagion" target="_blank" rel="noopener noreferrer"
+          class="detail-btn detail-btn-primary">VIEW CODE &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="detail-content">
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">What This Is</h2>
+      <p>A large scale Monte Carlo study of the Erdos and Renyi random graph model. Covers 6,300 lines of Python. Implements and benchmarks the graph generation algorithms from first principles. Validates three classical phase transition scaling laws through pooled simulation ensembles. Applies the framework as a null model to test real financial and neural network structure.</p>
+      <p>The financial contagion extension builds on that foundation. It models interbank exposures and failing nodes.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Why Implement Graph Generation From Scratch</h2>
+      <p>NetworkX provides a graph generator. Reimplementing it builds a deep understanding of the algorithm and the model.</p>
+      <p>The naive generator flips a Bernoulli coin for every pair of nodes. This requires O(n squared) operations. A 10,000 node graph requires 50 million coin flips. A 500,000 node graph requires 125 billion coin flips.</p>
+      <p>The Batagelj Brandes algorithm samples the skip distance to the next realized edge directly from a Geometric distribution. It jumps directly to that position without touching the non edges.</p>
+      <p>The algorithm runs in linear time for sparse graphs. The empirical speedup at n=10,000 is roughly 1,000x over the naive approach. At n=500,000 the Batagelj Brandes algorithm completes in under a second. The naive approach is computationally infeasible at this scale.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Three Scaling Laws, Verified Quantitatively</h2>
+
+      <div class="detail-subsection">Giant Component Emergence</div>
+      <p>The Galton Watson branching process predicts a macroscopic connected component forms at average degree 1. The largest component size is logarithmic below this threshold. A giant component appears discontinuously above it.</p>
+      <p>Verified across 3,050 simulations on graphs of 2,000 nodes. The empirical curve tracks the analytical equation within statistical noise across the full range.</p>
+
+      <div class="detail-subsection">Cluster Size Power Law</div>
+      <p>The network is in a critical state at the percolation threshold. The distribution of finite component sizes follows a strict power law. This exponent appears in critical phenomena across statistical physics.</p>
+      <p>Verified via OLS regression in logarithmic space over 30 realizations of 40,000 node graphs. Pooled 1.2 million finite component samples. The fitted slope recovers the theoretical exponent to within 3 significant figures.</p>
+
+      <div class="detail-subsection">Finite Size Scaling</div>
+      <p>Real graphs are finite. The phase transition occurs over a window around the critical point. This window shrinks with system size. Mean field theory predicts this scaling behavior.</p>
+      <p>Verified across 10,980 simulations across three system sizes. The logarithmic OLS slope matches the theoretical prediction.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Network Resilience, ER vs Scale Free</h2>
+      <p>Erdos and Renyi networks and Barabasi and Albert networks have fundamentally different vulnerability profiles under node removal.</p>
+      <p>ER graphs have a Poisson degree distribution. Most nodes have similar connectivity. Targeting the highest degree nodes is no more damaging than removing nodes at random. The random and targeted attack curves for giant component fraction overlap almost completely.</p>
+      <p>BA networks use preferential attachment to produce high degree hubs. They are robust under random failure. The giant component shatters under targeted attack on the highest degree nodes.</p>
+      <div class="detail-callout">
+        <p>This asymmetry is central to how financial networks fail. Interbank markets have hub banks that intermediate large fractions of total exposure. The weakness of scale free structure is directed shocks rather than random ones.</p>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Financial Contagion: Three Models</h2>
+
+      <div class="detail-subsection">Bond Percolation Cascade</div>
+      <p>Structurally equivalent to the SIR epidemic model. Each interbank exposure link transmits failure with probability T. Cascades are locally contained below the threshold. A giant component of failed banks emerges above it.</p>
+
+      <div class="detail-subsection">Watts Threshold Cascade, 2002</div>
+      <p>A behavioral model. A bank fails when the fraction of its failed counterparties exceeds a threshold. BA networks collapse at significantly lower thresholds than ER networks. This quantifies the fragility introduced by hub concentration.</p>
+
+      <div class="detail-subsection">DebtRank, Battiston et al 2012</div>
+      <p>Measures systemic importance through recursive equity propagation. A shock to a bank reduces its equity. This reduction propagates to its creditors. Hub nodes in BA networks carry systemic risk disproportionate to their count. Nodes in ER networks contribute more uniformly.</p>
+      <p>The phase diagram maps cascade size across 100 parameter combinations of transmissibility and equity buffer. It delineates the safe operating region from the systemic crisis region. Higher capital requirements directly shift the phase boundary.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Real World Null Model Testing</h2>
+
+      <div class="detail-subsection">S&amp;P 500 Correlation Network</div>
+      <p>Pearson correlations were computed over 3 years of daily log returns across 100 S&amp;P 500 stocks. Generated 1,000 ER null model graphs with identical node and edge counts. Computed the clustering coefficient, average path length, and degree assortativity for each.</p>
+      <p>The S&amp;P 500 network clustering coefficient generates a Z score exceeding 30 standard deviations from the ER null ensemble. The null hypothesis that financial correlation structure is random is rejected.</p>
+
+      <div class="detail-subsection">Brain Connectome</div>
+      <p>Modeled a 90 region connectome with 9 modules and 15 rich club hubs. Calibrated connection weights to published DTI tract statistics. Simulated signal propagation via discrete random walk over 60 time steps. Compared the modular brain network to an ER graph and a regular ring lattice.</p>
+      <p>The modular small world brain architecture integrates signals faster than either alternative. ER graphs diffuse signals broadly but slowly. Regular lattices are slow and localized. The modular hub connected brain architecture achieves fast global integration.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Technical Stack</h2>
+      <div class="detail-stack">
+        <span>Python</span>
+        <span>NumPy</span>
+        <span>SciPy</span>
+        <span>NetworkX</span>
+        <span>Matplotlib</span>
+        <span>Manim</span>
+        <span>yfinance</span>
+        <span>GitHub Actions CI</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="detail-footer">
+    <div>&copy; 2026 ATHMEEYA M KASHYAP</div>
+    <a href="../index.html#projects">&larr; ALL PROJECTS</a>
+  </footer>
+
+  <script src="project-detail.js"></script>
+</body>
+
+</html>
