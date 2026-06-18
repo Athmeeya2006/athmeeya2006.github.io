@@ -1771,11 +1771,11 @@
     }
 
     .ach-panel.swim .ach-panel-bg {
-      background: radial-gradient(ellipse at 50% 100%, #001020, #000);
+      background: radial-gradient(ellipse at 50% 100%, #1a0500, #000);
     }
 
     .ach-panel.swim .ach-title {
-      color: #4499ff;
+      color: var(--orange);
     }
 
     .ach-panel.cube .ach-panel-bg {
@@ -1787,27 +1787,27 @@
     }
 
     .ach-panel.code .ach-panel-bg {
-      background: radial-gradient(ellipse at 30% 70%, #001a08, #000);
+      background: radial-gradient(ellipse at 30% 70%, #1a0a00, #000);
     }
 
     .ach-panel.code .ach-title {
-      color: #00ff88;
+      color: var(--orange);
     }
 
     .ach-panel.score .ach-panel-bg {
-      background: radial-gradient(ellipse at 50% 50%, #1a1a00, #000);
+      background: radial-gradient(ellipse at 50% 50%, #1a0a00, #000);
     }
 
     .ach-panel.score .ach-title {
-      color: #ffd700;
+      color: var(--orange);
     }
 
     .ach-panel.tt .ach-panel-bg {
-      background: radial-gradient(ellipse at 60% 40%, #150015, #000);
+      background: radial-gradient(ellipse at 60% 40%, #1a0a00, #000);
     }
 
     .ach-panel.tt .ach-title {
-      color: #ff44ff;
+      color: var(--orange);
     }
 
     /* wave animation for swim */
