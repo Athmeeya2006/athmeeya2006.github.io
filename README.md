@@ -1,4 +1,4 @@
-# Athmeeya M Kashyap — Portfolio
+# Athmeeya M Kashyap - Portfolio
 
 My personal portfolio website, live at **[athmeeya2006.github.io](https://athmeeya2006.github.io)**.
 
