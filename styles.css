@@ -425,42 +425,6 @@
       justify-content: center;
     }
 
-    #hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 255, 229, .07), transparent),
-        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(136, 68, 255, .06), transparent),
-        radial-gradient(ellipse 70% 60% at 50% 80%, rgba(255, 69, 0, .04), transparent);
-      animation: auroraShift 12s ease-in-out infinite alternate;
-      z-index: 1;
-      pointer-events: none;
-      filter: blur(40px);
-    }
-
-    @keyframes auroraShift {
-      0% {
-        opacity: .5;
-        transform: scale(1) rotate(0deg);
-      }
-
-      33% {
-        opacity: .8;
-        transform: scale(1.1) rotate(2deg);
-      }
-
-      66% {
-        opacity: .5;
-        transform: scale(.95) rotate(-1deg);
-      }
-
-      100% {
-        opacity: .7;
-        transform: scale(1.05) rotate(1deg);
-      }
-    }
-
     #hero::after {
       content: '';
       position: absolute;
@@ -471,13 +435,6 @@
       background: linear-gradient(transparent, var(--black));
       z-index: 2;
       pointer-events: none;
-    }
-
-    #starCanvas {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
     }
 
     .hero-content {
@@ -522,29 +479,6 @@
       }
     }
 
-    .hero-scan {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-      box-shadow: 0 0 20px var(--cyan);
-      animation: scanDown 1.5s ease-in-out forwards;
-      z-index: 3;
-    }
-
-    @keyframes scanDown {
-      from {
-        top: 0;
-        opacity: 1;
-      }
-
-      to {
-        top: 100%;
-        opacity: 0;
-      }
-    }
 
     .hero-initials {
       font-family: 'Orbitron', monospace;

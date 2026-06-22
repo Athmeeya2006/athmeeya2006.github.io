@@ -104,47 +104,6 @@
       });
     }
 
-    // STARFIELD
-    const sc = document.getElementById('starCanvas');
-    const sctx = sc.getContext('2d');
-    let W, H, stars = [], mouseX = 0, mouseY = 0;
-    function resizeStar() {
-      W = sc.width = window.innerWidth;
-      H = sc.height = window.innerHeight;
-    }
-    resizeStar(); window.addEventListener('resize', resizeStar);
-    for (let i = 0; i < 200; i++) {
-      stars.push({ x: Math.random() * 2 - 1, y: Math.random() * 2 - 1, z: Math.random() });
-    }
-    document.addEventListener('mousemove', e => {
-      mouseX = (e.clientX / window.innerWidth - .5) * .05;
-      mouseY = (e.clientY / window.innerHeight - .5) * .05;
-    });
-    function drawStars() {
-      sctx.fillStyle = 'rgba(0,0,0,0.12)';
-      sctx.fillRect(0, 0, W, H);
-      stars.forEach(s => {
-        s.z -= 0.0025;
-        if (s.z <= 0) { s.z = 1; s.x = Math.random() * 2 - 1; s.y = Math.random() * 2 - 1; }
-        const sx = (s.x + mouseX) / s.z * W / 2 + W / 2;
-        const sy = (s.y + mouseY) / s.z * H / 2 + H / 2;
-        const r = Math.max(0.3, (1 - s.z) * 2.5);
-        const alpha = Math.pow(1 - s.z, 1.5); // smoother alpha curve
-        sctx.beginPath();
-        sctx.arc(sx, sy, r, 0, Math.PI * 2);
-        sctx.fillStyle = `rgba(200,240,255,${alpha})`;
-        sctx.fill();
-        if (r > 1.5) {
-          sctx.beginPath();
-          sctx.arc(sx, sy, r * 2, 0, Math.PI * 2);
-          sctx.fillStyle = `rgba(0,255,229,${alpha * 0.12})`;
-          sctx.fill();
-        }
-      });
-      requestAnimationFrame(drawStars);
-    }
-    drawStars();
-
     // SCROLL REVEALS (staggered + smoother)
     const reveals = document.querySelectorAll('.reveal');
     const revealObserver = new IntersectionObserver((entries) => {
