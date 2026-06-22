@@ -4,7 +4,7 @@
     // PRELOADER
     const bootFill = document.getElementById('bootFill');
     let pct = 0;
-    const duration = 1200;
+    const duration = 700;
     const start = performance.now();
 
     function animateLoader(now) {
@@ -14,7 +14,7 @@
       pct = eased * 100;
       if (bootFill) bootFill.style.width = pct + '%';
       if (progress < 1) requestAnimationFrame(animateLoader);
-      else setTimeout(launchSite, 200);
+      else setTimeout(launchSite, 120);
     }
     requestAnimationFrame(animateLoader);
 
@@ -22,11 +22,11 @@
       const pre = document.getElementById('preloader');
       pre.classList.add('shatter');
       // Let the shatter animation play smoothly before removing
-      setTimeout(() => { 
-        pre.style.display = 'none'; 
+      setTimeout(() => {
+        pre.style.display = 'none';
         document.body.style.overflow = '';
-        startHero(); 
-      }, 900);
+        startHero();
+      }, 600);
     }
 
     // HERO
@@ -414,7 +414,7 @@
     const blips = [
       { angle: 0.8, dist: .6, label: 'IIIT HYD' },
       { angle: 2.1, dist: .45, label: 'INMO' },
-      { angle: 4.5, dist: .75, label: 'BIKES' },
+      { angle: 4.5, dist: .75, label: 'SUPERBIKES' },
       { angle: 3.2, dist: .5, label: 'SGFI' },
     ];
     function drawRadar() {

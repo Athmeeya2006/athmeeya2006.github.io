@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="GTO Poker Bot. Four CFR family solvers compute Nash equilibrium strategies. Includes Bayesian opponent modeling and Glosten Milgrom market microstructure bridge.">
+    content="GTO Poker Bot. Four CFR-family solvers compute Nash-approximate strategies from Kuhn to Leduc Poker, with a Bayesian opponent model and a Glosten-Milgrom market bridge.">
   <title>GTO Poker Bot | Athmeeya M Kashyap</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
@@ -31,7 +31,7 @@
         <span class="detail-tag">Bayesian Inference</span>
         <span class="detail-tag">Market Microstructure</span>
       </div>
-      <h1 class="detail-title">GTO POKER BOT</h1>
+      <h1 class="detail-title">GTO Poker Bot</h1>
       <div class="detail-links">
         <a href="https://github.com/Athmeeya2006/GTO_Poker_Bot" target="_blank" rel="noopener noreferrer"
           class="detail-btn detail-btn-primary">VIEW CODE &rarr;</a>
@@ -43,94 +43,27 @@
   <main class="detail-content">
 
     <section class="detail-section">
-      <h2 class="detail-section-title">What This Is</h2>
-      <p>A Python framework for computing Nash equilibrium strategies in imperfect information card games. It includes four CFR family algorithms, a real time Bayesian opponent model, and a formal bridge to market microstructure theory via the Glosten Milgrom model.</p>
-      <p>The project spans a 24x range of game tree complexity from Kuhn Poker with 12 information sets to Leduc Poker with 288. The best solver drives exploitability below 0.001 chips per game within 10,000 iterations. This is verified against the closed form analytical solution for Kuhn. A playable CLI bot wires all components together into a real time adaptive system.</p>
+      <h2 class="detail-section-title">What It Does</h2>
+      <p>Four CFR-family solvers compute Nash-approximate strategies from Kuhn Poker to Leduc Poker, a 24x larger game tree. DCFR drives exploitability to 0.0008 chips per game, 33% below vanilla CFR at the same 10,000 iterations. A Bayesian opponent model with sequential leak detection switches from defensive to exploitative play in real time. A Glosten-Milgrom module ties bluff frequency to how bid-ask spreads form in markets.</p>
+      <p>It spans a 24x range of game tree size, from Kuhn Poker with 12 information sets to Leduc Poker with 288. A playable command line bot runs the solvers, opponent model, and trading bridge together and adapts as it plays.</p>
     </section>
 
     <section class="detail-section">
-      <h2 class="detail-section-title">Why CFR and Why From Scratch</h2>
-      <p>Counterfactual Regret Minimization is the algorithm family that solved poker at the professional level. Libratus, Pluribus, and AlphaHoldem all rely on CFR variants. The key insight states that minimizing regret across all information sets guarantees convergence to a Nash equilibrium in any two player zero sum game.</p>
-      <p>Knowing that CFR works and understanding why it works are different things. Building it from scratch forces clarity on the mechanism that a library call does not. It involves implementing all four variants, verifying convergence ordering empirically, and cross validating against closed form solutions.</p>
+      <h2 class="detail-section-title">How It Works</h2>
+
+      <div class="detail-subsection">Four CFR Solvers</div>
+      <p>Vanilla CFR, CFR+, DCFR, and external sampling MCCFR each minimize counterfactual regret toward a Nash equilibrium. At 10,000 iterations on Kuhn, DCFR reaches 0.0008 exploitability, against 0.001 for CFR+ and 0.0012 for Vanilla, and all four recover the analytical Kuhn equilibrium to within tolerance.</p>
+
+      <div class="detail-subsection">The Bayesian Opponent Model</div>
+      <p>A per information set Dirichlet posterior tracks opponent action frequencies and updates by conjugate Bayesian inference. A sequential probability ratio test decides whether the opponent deviates from GTO, and only once the evidence crosses the threshold does a confidence gated mixer blend GTO and exploitative play.</p>
+
+      <div class="detail-subsection">The Glosten-Milgrom Bridge</div>
+      <p>The module maps a strong hand to an informed trader and a bluff to a noise trader, tying the Nash bluff frequency to the adverse selection component of the bid-ask spread. It outputs fair spreads derived from the CFR equilibrium and sizes positions with the half Kelly criterion.</p>
     </section>
 
     <section class="detail-section">
-      <h2 class="detail-section-title">The Four Solvers</h2>
-
-      <div class="detail-subsection">Vanilla CFR</div>
-      <p>The baseline algorithm. At each information set, the regret for not playing an action is updated as its counterfactual value minus the expected value of the current strategy. The strategy profile is the time averaged regret matched distribution. Convergence rate is O(1/&radic;T).</p>
-
-      <div class="detail-subsection">CFR+</div>
-      <p>Eliminates negative regret accumulation by clipping regrets at zero and weighting recent iterations more heavily via linear averaging. In practice, regret never goes negative. Early bad moves stop haunting the solver. Reaches sub 0.001 exploitability on Kuhn at 10,000 iterations.</p>
-
-      <div class="detail-subsection">DCFR</div>
-      <p>Adds exponential down weighting of early iterations. This reduces the sensitivity to the arbitrary initial conditions of the first iteration. It is the fastest on Kuhn at 10,000 iterations. Exploitability reaches 0.0008 compared to 0.001 for CFR+ and 0.0012 for Vanilla.</p>
-
-      <div class="detail-subsection">External Sampling MCCFR</div>
-      <p>Replaces full tree traversal with sampled traversal. It only visits information sets reachable under the opponent strategy. Per infoset baseline tracking reduces variance. This approach scales to games where full tree traversal is computationally infeasible.</p>
-
-      <p>Convergence ordering verified empirically with DCFR outperforming CFR+ and Vanilla at 10,000 iterations on Kuhn. Both DCFR and CFR+ outperform Vanilla by eliminating wasted negative regret updates.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">Kuhn Poker as Ground Truth</h2>
-      <p>Kuhn Poker is textbook game theory. It features 3 cards, 2 players, and 1 bet each. The analytical Nash equilibrium is known exactly.</p>
-      <p>The optimal strategy for the first player is parameterized by a single bluff frequency.</p>
-      <ul>
-        <li>Player 1 Queen bet call is exactly one third.</li>
-        <li>Player 1 Jack check bet is exactly the bluff frequency.</li>
-        <li>King bet equals three times Jack bet to form the equilibrium family relationship.</li>
-      </ul>
-      <p>All four solvers recover the Nash values to within tolerance 0.01. The equilibrium family relationship is verified on every CI run.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">Scaling to Leduc, The Exploitability Problem</h2>
-      <p>Kuhn Poker has 12 information sets. Leduc Poker has 288. It uses 6 cards, 2 betting rounds, a community card, and allows raises. The game tree is 24x larger.</p>
-      <p>Exploitability on Kuhn can be computed by brute force. We enumerate all pure strategy profiles, find the best response for each, and take the maximum. This scales exponentially.</p>
-      <p>At 288 information sets, brute force requires evaluating 2 to the 288 pure strategy profiles. This is computationally infeasible.</p>
-      <p>The tree traversal best response algorithm solves this. It walks the game tree directly instead of enumerating strategy profiles. For each possible deal, it accumulates action values per information set weighted by the opponent reach probability. It then maximizes at each info set and traverses again with the constructed best response strategy. This scales polynomially.</p>
-      <p>Cross validated against brute force on Kuhn, the results agree to within 0.002. CFR+ converges on Leduc with monotonically decreasing exploitability from 0.035 at 50 iterations to below 0.005 at 100 iterations.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">The Opponent Model</h2>
-
-      <div class="detail-subsection">Dirichlet Posterior Model</div>
-      <p>Maintains a per information set Bayesian posterior over opponent action frequencies. The posterior updates via conjugate Bayesian inference after each observed action. It reports posterior mean, 95 percent credible intervals, KL divergence from Nash, and posterior variance.</p>
-
-      <div class="detail-subsection">SPRT Leak Detector, Wald 1947</div>
-      <p>Runs sequential hypothesis testing to determine whether the opponent deviates significantly from GTO. The SPRT reaches a decision in the minimum expected number of observations among all tests with the same error guarantees. Exploitation only triggers when the statistical evidence crosses the calibrated threshold.</p>
-
-      <div class="detail-subsection">Confidence Gated Strategy Mixer</div>
-      <p>Blends GTO and exploitative strategies as a continuous function of posterior precision. The mixing weight varies smoothly from pure GTO to full exploitation based on the product of posterior precision and KL signal strength. This prevents profit leakage from premature exploitation.</p>
-
-      <div class="detail-subsection">Range Model</div>
-      <p>Tracks the probability the opponent holds a specific hand given observed actions using Bayes theorem with Cromwells rule. No hand is assigned zero prior probability. This prevents posterior collapse on unobserved hands.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">The Glosten Milgrom Isomorphism</h2>
-      <p>The Glosten Milgrom model describes how a market maker sets bid ask spreads when some traders are informed and some are noise traders. The informed trader is the analogue of a poker player with a strong hand. The noise trader is the analogue of a bluff.</p>
-      <table class="detail-table">
-        <thead>
-          <tr><th>Poker</th><th>Market</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Player with strong hand (K)</td><td>Informed trader who knows V<sub>high</sub></td></tr>
-          <tr><td>Player bluffing with weak hand (J)</td><td>Noise trader submitting buy order</td></tr>
-          <tr><td>Nash bluff frequency &alpha;</td><td>Adverse selection component of the spread</td></tr>
-          <tr><td>Opponent model (belief updating)</td><td>Market maker updating beliefs on order flow</td></tr>
-        </tbody>
-      </table>
-      <p>The TradingSignalGenerator outputs fair spreads derived directly from CFR equilibrium bluff frequency. Position sizing uses the half Kelly criterion. This reduces theoretical ruin probability relative to full Kelly while preserving edge capture.</p>
-      <p>Five documented structural gaps each have a dedicated test class. These gaps include discrete against continuous values, single period against dynamic pricing, lack of inventory risk, lack of multi asset correlation, and adverse selection only.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">119 Tests, Full CI</h2>
-      <p>119 tests across 6 files cover game mechanics, solver convergence, exploitability computation, opponent model behavior, and GM isomorphism boundaries. Key verified properties include exact Nash values, zero sum terminal payoffs, and tree traversal against brute force cross validation within 0.002.</p>
-      <p>Continuous integration runs on every push with full pytest suite, static type checking, linting, and game engine import verification.</p>
+      <h2 class="detail-section-title">Results</h2>
+      <p>DCFR drives exploitability to 0.0008 chips per game, 33% below vanilla CFR at the same 10,000 iterations. The tree traversal best response is cross validated against brute force on Kuhn to within 0.002, and CFR+ converges on the 24x larger Leduc tree with monotonically decreasing exploitability.</p>
     </section>
 
     <section class="detail-section">
@@ -139,8 +72,6 @@
         <span>Python</span>
         <span>NumPy</span>
         <span>SciPy</span>
-        <span>pytest</span>
-        <span>GitHub Actions</span>
       </div>
     </section>
 

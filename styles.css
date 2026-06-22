@@ -1690,7 +1690,7 @@
       position: absolute;
       top: 20px;
       right: 24px;
-      opacity: .08;
+      opacity: .2;
       line-height: 1;
       pointer-events: none;
     }
@@ -2025,7 +2025,6 @@
       border: 1px solid var(--cyan);
       padding: 2px 8px;
       margin-left: auto;
-      animation: pingPulse 2s infinite;
     }
 
     @keyframes pingPulse {
@@ -2039,6 +2038,23 @@
         opacity: 1;
         box-shadow: 0 0 10px var(--cyan);
       }
+    }
+
+    /* CV button + social icons on one row */
+    .contact-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .contact-actions .cv-picker--contact {
+      margin-top: 0;
+    }
+
+    .contact-actions .social-links {
+      margin-top: 0;
     }
 
     /* social links */
@@ -2252,8 +2268,14 @@
       position: absolute;
       top: 16px;
       right: 20px;
-      opacity: .04;
       line-height: 1;
+      color: rgba(0, 255, 229, .13);
+      opacity: 1;
+      transition: color .4s ease;
+    }
+
+    .project-card:hover .project-num {
+      color: rgba(255, 69, 0, .18);
     }
 
     .project-icon {

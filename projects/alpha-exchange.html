@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="AlphaExchange. A distributed benchmarking platform of six Go microservices where users upload order-matching engines, ranked on a live leaderboard with sandboxed execution.">
+  <title>AlphaExchange | Athmeeya M Kashyap</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project-detail.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="detail-nav">
+    <a href="../index.html#projects" class="nav-logo">AMK</a>
+    <a href="../index.html#projects" class="back-link"><span class="arrow">&larr;</span> BACK TO PROJECTS</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="detail-hero">
+    <div class="detail-hero-inner">
+      <div class="detail-tags">
+        <span class="detail-tag">Distributed Systems</span>
+        <span class="detail-tag">Go</span>
+        <span class="detail-tag">gRPC/Protobuf</span>
+        <span class="detail-tag">Kafka</span>
+        <span class="detail-tag">Kubernetes</span>
+      </div>
+      <h1 class="detail-title">AlphaExchange</h1>
+      <div class="detail-links">
+        <a href="https://github.com/Athmeeya2006/AlphaExchange" target="_blank" rel="noopener noreferrer"
+          class="detail-btn detail-btn-primary">VIEW CODE &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="detail-content">
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">What It Does</h2>
+      <p>A distributed benchmarking platform of six Go microservices where users upload order-matching engines, each driven by a bot fleet and ranked on a live leaderboard by throughput, tail latency, and correctness. Runs every untrusted submission in a locked-down container with seccomp, AppArmor, dropped capabilities, and a read-only non-root filesystem. A shadow order book validates every fill against an authoritative reference engine regardless of execution order.</p>
+      <p>A user uploads a matching engine, a bot fleet drives traffic at it, and the leaderboard ranks it against everyone else. The submissions are untrusted code, so isolation and independent correctness checking are built into the platform.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">How It Works</h2>
+
+      <div class="detail-subsection">Six Go Microservices</div>
+      <p>The platform splits into six Go services: submission-api takes uploads, build-worker builds them, orchestrator schedules runs, bot-fleet drives order flow, telemetry-ingester collects metrics, and leaderboard-api ranks results. A React single page app is the frontend. Services talk over gRPC with Protobuf, telemetry flows through Kafka, Redis backs fast lookups, and Docker and Kubernetes run the fleet.</p>
+
+      <div class="detail-subsection">Sandboxed Execution</div>
+      <p>Every untrusted submission runs in a locked-down container. seccomp restricts the system calls it can make, AppArmor confines its file and resource access, Linux capabilities are dropped, and the filesystem is read-only and non-root. A submission that misbehaves stays boxed in.</p>
+
+      <div class="detail-subsection">Independent Correctness Checking</div>
+      <p>An authoritative reference matching engine defines the correct result for any order sequence. A shadow order book validates every fill against that reference independent of what the submission reports, so it catches impossible fills regardless of the order in which events execute.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Results</h2>
+      <p>Submissions are scored on a live leaderboard across three axes: throughput, tail latency, and correctness. A fast engine that produces an impossible fill does not climb the board, because the shadow order book flags it independent of the submission-reported result.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Technical Stack</h2>
+      <div class="detail-stack">
+        <span>Go</span>
+        <span>gRPC/Protobuf</span>
+        <span>Kafka</span>
+        <span>Redis</span>
+        <span>Docker</span>
+        <span>Kubernetes</span>
+        <span>React</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="detail-footer">
+    <div>&copy; 2026 ATHMEEYA M KASHYAP</div>
+  </footer>
+
+  <script src="project-detail.js"></script>
+</body>
+
+</html>

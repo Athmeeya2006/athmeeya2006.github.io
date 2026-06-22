@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Heston Stochastic-Volatility Options Pricer. Fourier inversion and Monte Carlo pricing, live S&P 500 calibration, reverse-mode adjoint Greeks, and a neural surrogate.">
+  <title>Heston Pricer | Athmeeya M Kashyap</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project-detail.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="detail-nav">
+    <a href="../index.html#projects" class="nav-logo">AMK</a>
+    <a href="../index.html#projects" class="back-link"><span class="arrow">&larr;</span> BACK TO PROJECTS</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="detail-hero">
+    <div class="detail-hero-inner">
+      <div class="detail-tags">
+        <span class="detail-tag">Quant Systems</span>
+        <span class="detail-tag">C++</span>
+        <span class="detail-tag">Python</span>
+        <span class="detail-tag">Stochastic Volatility</span>
+        <span class="detail-tag">Options Pricing</span>
+      </div>
+      <h1 class="detail-title">Heston Stochastic-Volatility Options Pricer</h1>
+      <div class="detail-links">
+        <a href="https://github.com/Athmeeya2006/Heston-Pricer" target="_blank" rel="noopener noreferrer"
+          class="detail-btn detail-btn-primary">VIEW CODE &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="detail-content">
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">What It Does</h2>
+      <p>Prices options under the Heston model two ways, Fourier inversion and Monte Carlo, that agree to within Monte Carlo error and both collapse to Black-Scholes at constant volatility. Fits a live S&amp;P 500 option chain and reproduces the volatility smile a flat Black-Scholes model cannot, cutting implied-vol error from 4.65 to 0.76 vol points. Computes price and every Greek in a single reverse-mode adjoint pass, 3.9x faster than bumping each input. A neural surrogate returns price and nine Greeks in 18.7 microseconds at sub-1% price error, 278x faster than the full pricer.</p>
+      <p>The Heston model treats variance as its own mean reverting random process rather than a fixed number. That extra freedom lets a single calibrated model match an entire chain of strikes and maturities at once, which a flat Black-Scholes model cannot. The pricer prices European options under this model, calibrates it to real market quotes, and serves Greeks fast enough for interactive use.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">How It Works</h2>
+
+      <div class="detail-subsection">Two Pricing Engines That Agree</div>
+      <p>Fourier inversion of the Heston characteristic function and a Monte Carlo simulation price the same option independently. The two agree to within Monte Carlo error. As a correctness check, both reduce to the Black-Scholes price to within 1e-5 when volatility is held constant, recovering the simpler model as a special case.</p>
+
+      <div class="detail-subsection">Calibration to a Live Chain</div>
+      <p>The calibrator fits the model to a live S&amp;P 500 option chain. Implied-volatility RMSE drops from 0.0465 vol points for a flat Black-Scholes fit to 0.00756 for Heston, a 6.2x reduction (4.65 to 0.76 vol points). The fitted surface carries zero calendar arbitrage violations and zero butterfly arbitrage violations.</p>
+
+      <div class="detail-subsection">Adjoint Greeks in One Pass</div>
+      <p>A single reverse-mode adjoint pass returns the price plus 8 Greeks. This is 3.9x faster than computing the same Greeks by central-difference bumping and 2.0x faster than forward-difference, because one backward sweep replaces a separate re-pricing for every input.</p>
+
+      <div class="detail-subsection">A Neural Surrogate</div>
+      <p>A neural surrogate, an MLP with dimensions 17 to 192 to 192 to 192 to 10 and 79,498 parameters, learns the pricing map. It trains on 198,602 rows and tests on 39,728. It returns the price and nine Greeks in 18.7 microseconds per option, 278x faster than the Fourier finite-difference baseline. The C++ kernels from ForgeLM back the numerical core.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Results</h2>
+      <p>Calibration cuts implied-volatility RMSE from 0.0465 to 0.00756 vol points, a 6.2x reduction, with no calendar or butterfly arbitrage violations on the fitted surface.</p>
+      <p>The adjoint pass returns price and 8 Greeks 3.9x faster than central-difference bumping. The neural surrogate reaches a price relative RMSE of 0.0097, that is 0.97%, at 18.7 microseconds per option.</p>
+      <div class="detail-callout">
+        <p>The sub-1% accuracy figure is for price only. Gamma relative RMSE is 0.144, about 14%, so the surrogate is accurate on price well before it is accurate on every Greek.</p>
+      </div>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Technical Stack</h2>
+      <div class="detail-stack">
+        <span>C++</span>
+        <span>Python</span>
+        <span>PyTorch</span>
+        <span>NumPy</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="detail-footer">
+    <div>&copy; 2026 ATHMEEYA M KASHYAP</div>
+  </footer>
+
+  <script src="project-detail.js"></script>
+</body>
+
+</html>

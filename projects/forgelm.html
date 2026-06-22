@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="ForgeLM. A GPT-style language model trained in PyTorch with a C++ CPU inference engine. KV-cache and AVX2/FMA SIMD kernels reach 6,359 tokens per second, a 312x gain.">
+  <title>ForgeLM | Athmeeya M Kashyap</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project-detail.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="detail-nav">
+    <a href="../index.html#projects" class="nav-logo">AMK</a>
+    <a href="../index.html#projects" class="back-link"><span class="arrow">&larr;</span> BACK TO PROJECTS</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="detail-hero">
+    <div class="detail-hero-inner">
+      <div class="detail-tags">
+        <span class="detail-tag">ML Systems</span>
+        <span class="detail-tag">C++</span>
+        <span class="detail-tag">AVX2/SIMD</span>
+        <span class="detail-tag">PyTorch</span>
+        <span class="detail-tag">Python</span>
+      </div>
+      <h1 class="detail-title">ForgeLM</h1>
+      <div class="detail-links">
+        <a href="https://github.com/Athmeeya2006/ForgeLM" target="_blank" rel="noopener noreferrer"
+          class="detail-btn detail-btn-primary">VIEW CODE &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="detail-content">
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">What It Does</h2>
+      <p>Trains a GPT-style language model in PyTorch and runs its C++ CPU inference engine: matmuls, attention, KV-cache, int4 quantizer, sampler, and HTTP server. Accelerates decoding from 20 to 6,359 tokens per second, a 312x gain, with a KV-cache and AVX2/FMA SIMD kernels, output staying bit-identical to the PyTorch reference. Adds int4 quantization for 7.1x smaller weights and a paged KV-cache serving 16 concurrent requests at 8,362 tokens per second.</p>
+      <p>The model is a byte-level GPT with 858,880 parameters, roughly 0.86M, using 4 layers, 4 attention heads, an embedding width of 128, and a block size of 256. PyTorch trains it. A separate C++ engine serves it on a CPU, which is where the throughput work happens.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">How It Works</h2>
+
+      <div class="detail-subsection">From Naive Loop to SIMD Kernels</div>
+      <p>Decode throughput is measured on a single core with deterministic greedy decoding so every variant produces the same tokens. The naive loop runs at 20.38 tokens per second. Adding a KV-cache, which stops the model from recomputing attention over the whole prefix every step, lifts it to 2,620 tokens per second, a 128.6x gain that stays bit-identical to the naive output. Adding AVX2/FMA float kernels lifts it further to 6,359 tokens per second, 312x over the naive loop and still bit-identical.</p>
+
+      <div class="detail-subsection">int4 Quantization</div>
+      <p>An int4 quantizer with a group size of 64 shrinks the weights 7.11x, from 3200 KiB to 450 KiB. Perplexity rises only 1.37%, so most of the memory comes off at a small accuracy cost.</p>
+
+      <div class="detail-subsection">Speculative Decoding</div>
+      <p>A small draft model of 133K parameters proposes tokens with K=2 that the full model verifies. The output stays bit-identical to greedy decoding, and the draft tokens are accepted 50.6% of the time.</p>
+
+      <div class="detail-subsection">Paged KV-Cache and Batching</div>
+      <p>A paged KV-cache with continuous batching serves 16 concurrent requests at 8,362 tokens per second aggregate, a 1.21x throughput gain under load over serving them without paging.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Results</h2>
+      <p>Decoding goes from 20.38 to 6,359 tokens per second on one core, a 312x gain, with the optimized output staying bit-identical to the PyTorch reference at every stage.</p>
+      <p>int4 quantization cuts weight size 7.11x for a 1.37% perplexity increase. Speculative decoding accepts 50.6% of draft tokens with identical output, and the paged KV-cache serves 16 concurrent requests at 8,362 tokens per second.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Technical Stack</h2>
+      <div class="detail-stack">
+        <span>C++</span>
+        <span>AVX2/SIMD</span>
+        <span>PyTorch</span>
+        <span>Python</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="detail-footer">
+    <div>&copy; 2026 ATHMEEYA M KASHYAP</div>
+  </footer>
+
+  <script src="project-detail.js"></script>
+</body>
+
+</html>

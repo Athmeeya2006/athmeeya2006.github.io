@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Cloud IDE. A multi-user browser IDE with the Monaco editor, a live shell over WebSockets, sandboxed execution, and a multi-tenant backend across four databases.">
+  <title>Cloud IDE | Athmeeya M Kashyap</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="project-detail.css">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="detail-nav">
+    <a href="../index.html#projects" class="nav-logo">AMK</a>
+    <a href="../index.html#projects" class="back-link"><span class="arrow">&larr;</span> BACK TO PROJECTS</a>
+  </nav>
+
+  <!-- HERO -->
+  <header class="detail-hero">
+    <div class="detail-hero-inner">
+      <div class="detail-tags">
+        <span class="detail-tag">Full-Stack</span>
+        <span class="detail-tag">React</span>
+        <span class="detail-tag">TypeScript</span>
+        <span class="detail-tag">FastAPI</span>
+        <span class="detail-tag">WebSockets</span>
+      </div>
+      <h1 class="detail-title">Cloud IDE</h1>
+      <div class="detail-links">
+        <a href="https://github.com/Athmeeya2006/CloudIDE" target="_blank" rel="noopener noreferrer"
+          class="detail-btn detail-btn-primary">VIEW CODE &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="detail-content">
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">What It Does</h2>
+      <p>A multi-user browser IDE with the Monaco editor and a live shell over WebSockets, plus sandboxed execution and a one-click full-stack runner. A multi-tenant backend backs per-project databases across SQLite, PostgreSQL, MySQL, and MongoDB from a few shared servers, with remote-capable live preview.</p>
+      <p>The project puts a working development environment in the browser. Several users can edit, run a shell, execute code, and preview a running app without installing anything locally, while the backend keeps each project isolated and gives it the database it needs.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">How It Works</h2>
+
+      <div class="detail-subsection">The Editor and Shell</div>
+      <p>The frontend is React with TypeScript and embeds the Monaco editor, the same editor core used in VS Code. A live shell streams over WebSockets, so terminal input and output move in real time. Code runs in sandboxed execution, and a one-click full-stack runner brings a project up end to end.</p>
+
+      <div class="detail-subsection">The FastAPI Backend</div>
+      <p>The backend is FastAPI on Python, split into routers by concern: terminal, preview, git, files, processes, database, projects, and auth. A remote-capable live preview lets the running app be viewed even when it executes away from the browser.</p>
+
+      <div class="detail-subsection">Multi-Tenant Databases</div>
+      <p>A multi-tenant backend provisions a database per project across SQLite, PostgreSQL, MySQL, and MongoDB, drawing them from a small shared server pool rather than standing up a server per user. One pool of shared servers fronts many isolated per-project databases.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Results</h2>
+      <p>The result is a browser IDE that edits, runs a shell, executes code, and previews a full-stack app for multiple users at once. Per-project databases span four engines from a few shared servers, and live preview works even when the project runs remotely.</p>
+    </section>
+
+    <section class="detail-section">
+      <h2 class="detail-section-title">Technical Stack</h2>
+      <div class="detail-stack">
+        <span>React</span>
+        <span>TypeScript</span>
+        <span>FastAPI</span>
+        <span>Python</span>
+        <span>WebSockets</span>
+        <span>SQLite</span>
+        <span>PostgreSQL</span>
+        <span>MySQL</span>
+        <span>MongoDB</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="detail-footer">
+    <div>&copy; 2026 ATHMEEYA M KASHYAP</div>
+  </footer>
+
+  <script src="project-detail.js"></script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="No Regret Market Making Engine. C++17 limit order book with pybind11. Benchmarks 6 algorithms across 10,000 round simulations under adversarial market conditions.">
+    content="No Regret Market Making Engine. C++ limit order book with pybind11. Benchmarks six market-making algorithms across 10,000 round simulations under four market regimes.">
   <title>No-Regret Market Making Engine | Athmeeya M Kashyap</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
@@ -26,10 +26,9 @@
     <div class="detail-hero-inner">
       <div class="detail-tags">
         <span class="detail-tag">Quant Systems</span>
-        <span class="detail-tag">C++17</span>
+        <span class="detail-tag">C++</span>
         <span class="detail-tag">Python</span>
         <span class="detail-tag">Market Microstructure</span>
-        <span class="detail-tag">Online Learning</span>
       </div>
       <h1 class="detail-title">No Regret Market Making Engine</h1>
       <div class="detail-links">
@@ -43,102 +42,38 @@
   <main class="detail-content">
 
     <section class="detail-section">
-      <h2 class="detail-section-title">What This Is</h2>
-      <p>A full stack research sandbox for studying no regret learning in market making. It combines a C++17 limit order book with Python bindings via pybind11. It includes adversarial and stochastic order flow generators. An evaluation toolkit benchmarks 6 algorithms across 10,000 round simulations under stationary and adversarial market conditions.</p>
-      <p>The central question asks whether a spread quoting strategy can guarantee bounded regret under parameter drift and adversarial order flow without environmental models. Classical market making assumes calibrated arrival models and stationary volatility. Regimes shift and parameters drift in practice. Adversarial traders exploit fixed strategies. The Exp3 algorithm family makes no such assumptions. They guarantee sublinear regret even under adversarial rewards. This project stress tests that guarantee across 4 market regimes with abrupt and gradual transitions.</p>
+      <h2 class="detail-section-title">What It Does</h2>
+      <p>A C++ limit order book exposed to Python through pybind11. Benchmarks six market-making algorithms across 10,000 round simulations under four market regimes. After a sudden regime shift, the sliding-window Exp3 re-finds the best quote in 1 round versus 161 for a static learner, a 161x faster recovery. Cumulative regret holds at 63% of the O(sqrt(T K ln K)) worst-case bound, so it provably never trails the best fixed quote by much.</p>
+      <p>The goal is bounded regret under parameter drift and adversarial order flow without modeling the environment. The Exp3 family makes no assumptions about the reward process and still guarantees sublinear regret, and the benchmark measures whether that guarantee holds across the four regimes.</p>
     </section>
 
     <section class="detail-section">
-      <h2 class="detail-section-title">The C++17 Order Book</h2>
-      <p>The matching engine is 760 lines of C++17 with price time priority and FIFO queues at each price level. Price levels use standard maps for logarithmic insertion and lookup. Individual queues at each level use double ended queues for time priority ordering. A separate hash map order index enables constant time cancel lookups.</p>
-      <p>The engine exposes derived statistics that feed directly into the learning algorithms. It computes order flow imbalance and rolling realized volatility from logarithmic return standard deviation over a sliding window. It tracks volume weighted average price and multi level depth queries for both bid and ask sides.</p>
-      <p>The pybind11 binding layer maps C++ methods to Python with automatic standard template library container conversion. It exposes the engine as a Python module. A minimal Python stub provides a fallback for lightweight testing if the C++ extension is unavailable. This stub is slower but sufficient to run the learning algorithms without rebuilding.</p>
+      <h2 class="detail-section-title">How It Works</h2>
+
+      <div class="detail-subsection">The C++ Order Book</div>
+      <p>The matching engine is roughly 760 lines of C++ with price time priority and FIFO queues at each level. A pybind11 layer exposes it to about 3,800 lines of Python. The engine derives order flow imbalance, rolling realized volatility, volume weighted average price, and depth, which feed directly into the learning algorithms.</p>
+
+      <div class="detail-subsection">Six Algorithms, Four Regimes</div>
+      <p>The benchmark runs Exp3, Exp3 with the doubling trick, sliding-window Exp3, contextual EXP4, the Avellaneda-Stoikov model baseline, and a fixed-spread baseline across 10,000 round simulations. Four regimes, calm, volatile, illiquid, and informed, transition abruptly or gradually to test how each algorithm adapts.</p>
+
+      <div class="detail-subsection">Measuring Regret</div>
+      <p>RegretTracker computes external regret versus the best fixed spread in hindsight using per round counterfactuals, with rolling windows and bootstrap confidence intervals that make the convergence curves statistically interpretable.</p>
     </section>
 
     <section class="detail-section">
-      <h2 class="detail-section-title">Six Algorithms, One Simulation Loop</h2>
-      <p>Each round of the simulation proceeds in eight steps. It applies the current regime and builds a 9 dimensional context vector from book state and inventory. It queries the market maker for a spread and submits quotes. It samples and submits noise and informed orders. It advances the mid price by a geometric Brownian motion step. It computes reward and counterfactual rewards for all spread arms. Finally it updates the market maker.</p>
-
-      <div class="detail-subsection">Exp3</div>
-      <p>The standard adversarial bandit uses importance weighted reward updates with an optimal learning rate. It achieves the theoretical regret bound. Per round regret decreases over time. This was verified empirically at 3,000 rounds.</p>
-
-      <div class="detail-subsection">Exp3 with Doubling Trick</div>
-      <p>Restarts Exp3 on doubling epochs to handle unknown horizons. This costs a constant factor penalty in the regret bound but requires no horizon parameter at initialization.</p>
-
-      <div class="detail-subsection">Sliding Window Exp3</div>
-      <p>Forgets rewards older than the specified window. This makes it non stationary. It tracks regime shifts by forgetting the past rather than averaging over the full history. It recovers the correct spread arm faster than standard Exp3 after regime changes. It suffers higher variance during stationary periods.</p>
-
-      <div class="detail-subsection">Contextual Bandit EXP4</div>
-      <p>Mixes a pool of 8 experts including fixed spread, volatility scaled, inventory aware, order flow imbalance, and momentum. It reweights experts continuously and concentrates weight on the dominant expert per regime. The context vector provides the 9 dimensional feature input that differentiates EXP4 from context free Exp3 variants.</p>
-
-      <div class="detail-subsection">Avellaneda and Stoikov, 2008</div>
-      <p>The model based baseline uses a closed form spread derived from the reservation price formula. It applies maximum likelihood estimation calibration for volatility and order arrival rate. It outperforms Exp3 under stationary conditions where the model is well calibrated. It degrades measurably when parameters shift between regimes and the calibration becomes stale.</p>
-
-      <div class="detail-subsection">Fixed Spread Baselines</div>
-      <p>Eight fixed spread instances anchor the regret computation. They provide the counterfactual reference for comparing all other algorithms.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">Three Order Flow Models</h2>
-
-      <div class="detail-subsection">NoiseTrader</div>
-      <p>Generates Poisson arrivals with power law order sizes. It produces balanced and price insensitive order flow. This represents the benign background flow that generates spread revenue.</p>
-
-      <div class="detail-subsection">StochasticInformedTrader</div>
-      <p>Trades when the true asset value exceeds the quoted price. Order size scales with the edge between value and quote. Arrival rate is 20 percent of the noise rate. This is adverse selection where every fill from an informed trader is a loss.</p>
-
-      <div class="detail-subsection">AdversarialInformedTrader</div>
-      <p>Observes the market maker spread distribution and computes a best response. It alternates between exploit phases and bait phases. Exploit phases submit large informed orders when quotes are tight. Bait phases submit small balanced orders to pull quotes tighter. This is the hardest adversary in the system and the primary stress test.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">The Counterfactual Approximation</h2>
-      <p>Regret computation requires knowing what reward each spread arm would have earned in every round. Exact computation would require re running the full simulation for each arm per round. This computational cost makes 10,000 round benchmarks impractical.</p>
-      <p>The simulator uses an exponential fill approximation instead. Order arrival sensitivity to spread width is modeled exponentially. This approximation is directionally correct because tighter spreads receive more fills. It remains biased relative to the true fill distribution from the order flow.</p>
-      <div class="detail-callout">
-        <p>This is documented explicitly as a design limitation. The regret curves measure performance relative to the approximated counterfactual rather than an oracle. The no regret guarantee holds under this approximation. The absolute regret values should be interpreted with that caveat in mind.</p>
-      </div>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">Evaluation Toolkit</h2>
-      <p>RegretTracker computes exact external regret versus the best fixed spread in hindsight. It uses per round counterfactuals across all spread arms. Rolling regret over a 500 round window and bootstrap confidence intervals make the convergence curves statistically interpretable.</p>
-      <p>RegretDecomposer breaks economic profit and loss into three components. It separates spread revenue from adverse selection loss and inventory loss. It tracks cumulative profit by component separately for each algorithm.</p>
-      <p>AdaptationSpeedAnalyzer measures recovery time after each regime change. It compares empirical recovery to theoretical predictions. It computes Pearson correlation between predicted and observed recovery times with statistical significance testing.</p>
-      <p>Benchmarker runs all learning algorithms and fixed spread baselines on a shared simulation factory. It reports total reward, total regret, theoretical bounds, Sharpe ratio, max drawdown, and mean absolute inventory.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">Four Market Regimes</h2>
-      <p>The Calm regime features low volatility and normal arrival rates. The Volatile regime features high volatility and elevated arrival rates. The Illiquid regime features low arrival rates and high adverse selection. The Informed regime features high informed fraction with adversarial order flow.</p>
-      <p>Transitions between regimes are configurable as abrupt or gradual. The default duration is 2,000 rounds per regime across a 10,000 round simulation.</p>
-      <p>This regime structure makes the benchmark meaningful. Any algorithm can perform well in stationary conditions. The interesting question is how quickly it adapts when the environment changes. The simulation tests whether its regret bound still holds during and after the transition.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">GARCH Volatility and Synthetic Microstructure</h2>
-      <p>The true value process is geometric Brownian motion with optional Poisson jumps. The observed mid price is a mean reverting perturbation of true value that creates microstructure noise. Volatility clustering comes from a GARCH process applied to true value returns. Order sizes follow a power law distribution with fat tails.</p>
-      <p>Real market data adds engineering overhead and legal complexity without improving the core property being tested. Synthetic data with controlled statistical properties makes the experiment reproducible. It makes regime transitions configurable and adversarial scenarios exact.</p>
-    </section>
-
-    <section class="detail-section">
-      <h2 class="detail-section-title">Tests and CI</h2>
-      <p>Eight test modules cover algorithmic convergence and matching engine mechanics. They verify regime adaptation, expert pool weight concentration, and adversarial trader logic. They validate the reservation price formula, regret decomposition component accounting, and numerical stability.</p>
-      <p>GitHub Actions builds the C++ extension from source. It validates the engine import and runs the full test suite on every push. Build and test complete in under two minutes.</p>
+      <h2 class="detail-section-title">Results</h2>
+      <p>After a sudden regime shift, sliding-window Exp3 re-finds the best quote in 1 round versus 161 for a static learner, a 161x faster recovery.</p>
+      <p>Cumulative regret reaches 198.58 against an O(sqrt(T K ln K)) worst-case bound of 315.93, that is 63% of the bound, so the strategy provably never trails the best fixed quote by much.</p>
     </section>
 
     <section class="detail-section">
       <h2 class="detail-section-title">Technical Stack</h2>
       <div class="detail-stack">
-        <span>C++17</span>
-        <span>CMake</span>
+        <span>C++</span>
         <span>pybind11</span>
         <span>Python</span>
         <span>NumPy</span>
         <span>SciPy</span>
-        <span>Pandas</span>
-        <span>Matplotlib</span>
-        <span>GitHub Actions</span>
       </div>
     </section>
 
