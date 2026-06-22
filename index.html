@@ -78,7 +78,13 @@
       <div class="hero-subtitle" id="heroSubtitle"></div>
       <div class="hero-ctas">
         <a href="#about" class="btn-primary">EXPLORE →</a>
-        <a href="assets/Athmeeya_Kashyap_cv.pdf" download class="btn-secondary">$ ./download_cv.sh</a>
+        <div class="cv-picker">
+          <button type="button" class="btn-secondary cv-trigger" aria-haspopup="true" aria-expanded="false">$ ./download_cv.sh<span class="cv-caret">▾</span></button>
+          <div class="cv-menu" role="menu">
+            <a href="assets/Athmeeya_Kashyap_SWE.pdf" download class="cv-menu-item" role="menuitem">SWE CV</a>
+            <a href="assets/Athmeeya_Kashyap_Quant.pdf" download class="cv-menu-item" role="menuitem">Quant CV</a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -506,7 +512,13 @@
               style="border-color:var(--orange);color:var(--orange);animation:none">LOCKED</span>
           </div>
         </div>
-        <a href="assets/Athmeeya_Kashyap_cv.pdf" download class="cv-btn reveal">$ execute download_cv.sh</a>
+        <div class="cv-picker cv-picker--contact reveal">
+          <button type="button" class="cv-btn cv-trigger" aria-haspopup="true" aria-expanded="false">$ execute download_cv.sh<span class="cv-caret">▾</span></button>
+          <div class="cv-menu" role="menu">
+            <a href="assets/Athmeeya_Kashyap_SWE.pdf" download class="cv-menu-item" role="menuitem">SWE CV</a>
+            <a href="assets/Athmeeya_Kashyap_Quant.pdf" download class="cv-menu-item" role="menuitem">Quant CV</a>
+          </div>
+        </div>
         <div class="social-links reveal">
           <a href="https://github.com/athmeeya2006" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
             <svg viewBox="0 0 24 24">

@@ -791,3 +791,34 @@
         }
       } else konamiIdx = 0;
     });
+
+    // CV DOWNLOAD PICKER (SWE / Quant chooser)
+    const cvPickers = document.querySelectorAll('.cv-picker');
+    function closeAllCvPickers() {
+      cvPickers.forEach(p => {
+        p.classList.remove('open');
+        const t = p.querySelector('.cv-trigger');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      });
+    }
+    cvPickers.forEach(picker => {
+      const trigger = picker.querySelector('.cv-trigger');
+      if (!trigger) return;
+      trigger.addEventListener('click', e => {
+        e.stopPropagation();
+        const willOpen = !picker.classList.contains('open');
+        closeAllCvPickers();
+        if (willOpen) {
+          picker.classList.add('open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+      // close after picking a CV
+      picker.querySelectorAll('.cv-menu-item').forEach(item => {
+        item.addEventListener('click', closeAllCvPickers);
+      });
+    });
+    document.addEventListener('click', closeAllCvPickers);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeAllCvPickers();
+    });
