@@ -25,7 +25,22 @@ jobs:
         run: pip install html5validator
 
       - name: Validate HTML and CSS
-        run: html5validator --root . --also-check-css
+        # The bundled Nu (vnu.jar) CSS backend is years behind the spec, so it
+        # flags valid modern CSS as errors. We ignore those known false
+        # positives while still catching real HTML/CSS mistakes:
+        #   - inset / backdrop-filter / aspect-ratio / scrollbar-* : valid CSS
+        #     properties the checker doesn't recognise.
+        #   - linear-gradient "too few values" : raised because the checker
+        #     can't resolve CSS custom properties, e.g. var(--cyan).
+        run: |
+          html5validator --root . --also-check-css \
+            --ignore-re \
+              'CSS: "inset"' \
+              'CSS: "backdrop-filter"' \
+              'CSS: "scrollbar-width"' \
+              'CSS: "scrollbar-color"' \
+              'CSS: "aspect-ratio"' \
+              'too few values for the property "linear-gradient"'
 
   link-check:
     name: Check internal links

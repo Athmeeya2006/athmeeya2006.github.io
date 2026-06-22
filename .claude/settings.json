@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(gh run *)",
+      "Bash(html5validator --version)",
+      "Bash(python3 -c \"import yaml; yaml.safe_load\\(open\\('.github/workflows/ci.yml'\\)\\); print\\('OK'\\)\")"
+    ]
+  }
+}
