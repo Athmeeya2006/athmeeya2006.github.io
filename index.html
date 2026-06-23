@@ -287,13 +287,25 @@
   <section id="achievements">
     <div class="ach-header">
       <div class="section-label reveal">Achievements &amp; Leadership</div>
-      <h2 class="section-title reveal">Hall of<br>Legends</h2>
+      <h2 class="section-title reveal">A Few<br>Highlights</h2>
     </div>
     <div class="ach-scroll-track">
 
       <div class="ach-panel math reveal">
         <div class="ach-panel-bg"></div>
         <div class="ach-num">01</div>
+        <div class="ach-panel-content">
+          <div class="ach-tag">Mathematics</div>
+          <div class="ach-title" style="color:var(--cyan)">INMO<br>QUALIFIER</div>
+          <div class="ach-subtitle">2022</div>
+          <div class="ach-stat">Top ~300 nationally</div>
+          <div class="ach-desc">Qualified for the Indian National Mathematical Olympiad through the national three-stage olympiad pipeline.</div>
+        </div>
+      </div>
+
+      <div class="ach-panel math reveal stagger-1">
+        <div class="ach-panel-bg"></div>
+        <div class="ach-num">02</div>
         <div class="ach-panel-content">
           <div class="ach-tag">Mathematics</div>
           <div class="ach-title" style="color:var(--cyan)">INMOTC<br>SELECTED</div>
@@ -304,24 +316,12 @@
         </div>
       </div>
 
-      <div class="ach-panel math reveal stagger-1">
-        <div class="ach-panel-bg"></div>
-        <div class="ach-num">02</div>
-        <div class="ach-panel-content">
-          <div class="ach-tag">Mathematics</div>
-          <div class="ach-title" style="color:var(--cyan)">INMO<br>QUALIFIER</div>
-          <div class="ach-subtitle">2022</div>
-          <div class="ach-stat">Top ~300 nationally</div>
-          <div class="ach-desc">Qualified for the Indian National Mathematical Olympiad through the national three-stage olympiad pipeline.</div>
-        </div>
-      </div>
-
-      <div class="ach-panel math reveal stagger-2">
+      <div class="ach-panel astro reveal stagger-2">
         <div class="ach-panel-bg"></div>
         <div class="ach-num">03</div>
         <div class="ach-panel-content">
           <div class="ach-tag">Astronomy</div>
-          <div class="ach-title" style="color:var(--cyan)">TOP 1%<br>STATE</div>
+          <div class="ach-title" style="color:var(--orange)">TOP 1%<br>STATE</div>
           <div class="ach-subtitle">NSEA, Karnataka (2023)</div>
           <div class="ach-stat">Top 1%</div>
           <div class="ach-desc">Ranked in the top 1% statewide in the National Standard Examination in Astronomy (IAPT).</div>
@@ -398,7 +398,7 @@
         <div class="project-num">01</div>
         <div class="project-tag">Quant Systems</div>
         <div class="project-title">Heston Stochastic-Volatility Options Pricer</div>
-        <div class="project-desc">Prices options under the Heston model two ways, Fourier inversion and Monte Carlo, that agree to within Monte Carlo error and both collapse to Black-Scholes at constant volatility. Fits a live S&amp;P 500 option chain and reproduces the volatility smile a flat Black-Scholes model cannot, cutting implied-vol error from 4.65 to 0.76 vol points. Computes price and every Greek in a single reverse-mode adjoint pass, 3.9x faster than bumping each input. A neural surrogate returns price and nine Greeks in 18.7 microseconds at sub-1% price error, 278x faster than the full pricer.</div>
+        <div class="project-desc">Prices options under the Heston model two ways, Fourier inversion and Monte Carlo, that agree to within Monte Carlo error and both collapse to Black-Scholes at constant volatility. Fits a live S&amp;P 500 option chain and reproduces the volatility smile a flat Black-Scholes model cannot, cutting implied-vol error from 4.65 to 0.76 vol points. Computes price and every Greek in a single reverse-mode adjoint pass, 3.9x faster than bumping each input. A small neural network returns price and nine Greeks in 18.7 microseconds at sub-1% price error, 278x faster than the full pricer.</div>
         <div class="project-tech">
           <span>C++</span><span>Python</span><span>PyTorch</span><span>NumPy</span>
         </div>
@@ -428,7 +428,7 @@
         <div class="project-num">03</div>
         <div class="project-tag">Quant Systems</div>
         <div class="project-title">GTO Poker Bot</div>
-        <div class="project-desc">Four CFR-family solvers compute Nash-approximate strategies from Kuhn Poker to Leduc Poker, a 24x larger game tree. DCFR drives exploitability to 0.0008 chips per game, 33% below vanilla CFR at the same 10,000 iterations. A Bayesian opponent model with sequential leak detection switches from defensive to exploitative play in real time. A Glosten-Milgrom module ties bluff frequency to how bid-ask spreads form in markets.</div>
+        <div class="project-desc">Four CFR-family solvers compute Nash-approximate strategies from Kuhn Poker to Leduc Poker, a 24x larger game tree. DCFR drives exploitability to 0.0008 chips per hand, 33% below vanilla CFR at the same 10,000 iterations. A Bayesian opponent model with sequential leak detection switches from defensive to exploitative play in real time. A Glosten-Milgrom module ties bluff frequency to how bid-ask spreads form in markets.</div>
         <div class="project-tech">
           <span>Python</span><span>CFR</span><span>Bayesian Inference</span><span>NumPy</span><span>SciPy</span>
         </div>

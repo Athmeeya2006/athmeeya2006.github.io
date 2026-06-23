@@ -1704,6 +1704,14 @@
       color: var(--cyan);
     }
 
+    .ach-panel.astro .ach-panel-bg {
+      background: radial-gradient(ellipse at 70% 30%, #1a0a00, #000);
+    }
+
+    .ach-panel.astro .ach-title {
+      color: var(--orange);
+    }
+
     .ach-panel.swim .ach-panel-bg {
       background: radial-gradient(ellipse at 50% 100%, #1a0500, #000);
     }
