@@ -279,7 +279,7 @@
       [24,1],   // ML Basics → Python
       [24,19],  // ML Basics → DSA (algorithms)
     ];
-    const catColors = ['#6BEBA5', '#46E08B', '#2FC474', '#3F9E63'];
+    const catColors = ['#16140E', '#3D392F', '#6E6857', '#8C8473'];
 
     skillNodes.forEach(n => { n.px = n.x * SW; n.py = n.y * SH; n.vx = (Math.random() - .5) * 0.15; n.vy = (Math.random() - .5) * 0.15; n.hover = false; });
     let hoverNode = null;
@@ -319,7 +319,7 @@
         skctx.beginPath();
         skctx.moveTo(na.px, na.py);
         skctx.lineTo(nb.px, nb.py);
-        skctx.strokeStyle = active ? 'rgba(70, 224, 139,0.5)' : 'rgba(70, 224, 139,0.08)';
+        skctx.strokeStyle = active ? 'rgba(20, 18, 14,0.5)' : 'rgba(20, 18, 14,0.08)';
         skctx.lineWidth = active ? 1.5 : .8;
         skctx.stroke();
       });
@@ -356,7 +356,7 @@
         // circle
         skctx.beginPath();
         skctx.arc(n.px, n.py, r, 0, Math.PI * 2);
-        skctx.fillStyle = isHov ? col + '22' : '#060807';
+        skctx.fillStyle = isHov ? col + '22' : '#EFEBDF';
         skctx.fill();
         skctx.strokeStyle = isHov ? col : col + '66';
         skctx.lineWidth = isHov ? 2 : 1;
@@ -365,13 +365,13 @@
         skctx.stroke();
         skctx.shadowBlur = 0;
         // label
-        skctx.fillStyle = isHov ? col : '#E8EDEA';
+        skctx.fillStyle = isHov ? col : '#16140E';
         skctx.font = `${isHov ? 'bold ' : ''}${Math.max(10, Math.round(r * .42))}px Space Mono, monospace`;
         skctx.textAlign = 'center'; skctx.textBaseline = 'middle';
         skctx.fillText(n.label, n.px, n.py);
         if (isHov) {
           skctx.font = `11px Space Mono, monospace`;
-          skctx.fillStyle = '#E8EDEA';
+          skctx.fillStyle = '#16140E';
           skctx.fillText(n.level, n.px, n.py + r + 16);
         }
       });
@@ -390,9 +390,9 @@
       const cols = Math.floor(codeC.width / 16);
       const drops = Array(cols).fill(0);
       function drawMatrix() {
-        mctx.fillStyle = 'rgba(0,0,0,0.05)';
+        mctx.fillStyle = 'rgba(239, 235, 223, 0.10)';
         mctx.fillRect(0, 0, codeC.width, codeC.height);
-        mctx.fillStyle = '#2FC474';
+        mctx.fillStyle = '#9A9382';
         mctx.font = '14px Space Mono, monospace';
         drops.forEach((y, i) => {
           const ch = Math.random() > .5 ? '1' : '0';
@@ -423,12 +423,12 @@
       [.25, .5, .75, 1].forEach(f => {
         rctx.beginPath();
         rctx.arc(CX, CY, MAX_R * f, 0, Math.PI * 2);
-        rctx.strokeStyle = 'rgba(70, 224, 139,0.15)';
+        rctx.strokeStyle = 'rgba(20, 18, 14,0.15)';
         rctx.lineWidth = 1;
         rctx.stroke();
       });
       // crosshair
-      rctx.strokeStyle = 'rgba(70, 224, 139,0.1)';
+      rctx.strokeStyle = 'rgba(20, 18, 14,0.1)';
       rctx.beginPath(); rctx.moveTo(CX, 20); rctx.lineTo(CX, RH - 20); rctx.stroke();
       rctx.beginPath(); rctx.moveTo(20, CY); rctx.lineTo(RW - 20, CY); rctx.stroke();
       // sweep
@@ -437,7 +437,7 @@
       rctx.translate(CX, CY);
       rctx.rotate(radarAngle);
       const sg = rctx.createLinearGradient(0, 0, MAX_R, 0);
-      sg.addColorStop(0, 'rgba(70, 224, 139,0.8)');
+      sg.addColorStop(0, 'rgba(20, 18, 14,0.45)');
       sg.addColorStop(1, 'transparent');
       rctx.beginPath();
       rctx.moveTo(0, 0);
@@ -456,11 +456,11 @@
         const by = CY + Math.sin(b.angle) * MAX_R * b.dist;
         rctx.beginPath();
         rctx.arc(bx, by, 4, 0, Math.PI * 2);
-        rctx.fillStyle = `rgba(70, 224, 139,${fade})`;
-        rctx.shadowBlur = 10; rctx.shadowColor = '#46E08B';
+        rctx.fillStyle = `rgba(242, 58, 0,${fade})`;
+        rctx.shadowBlur = 0; rctx.shadowColor = '#F23A00';
         rctx.fill();
         rctx.shadowBlur = 0;
-        rctx.fillStyle = `rgba(70, 224, 139,${fade * .7})`;
+        rctx.fillStyle = `rgba(242, 58, 0,${fade * .7})`;
         rctx.font = '12px Space Mono, monospace';
         rctx.fillText(b.label, bx + 8, by + 4);
       });
@@ -561,7 +561,7 @@
       }
       requestAnimationFrame(drawGrain);
     }
-    drawGrain();
+    // drawGrain(); // film grain removed for light editorial theme
 
     // TEXT SCRAMBLE on section titles (smoother)
     const scrambleChars = '!<>-_\\/[]{}.=+*^?#_ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -637,80 +637,10 @@
       });
     });
 
-    // ACHIEVEMENT PANEL 3D TILT (smooth lerp)
-    document.querySelectorAll('.ach-panel').forEach(panel => {
-      let tiltX = 0, tiltY = 0, targetTiltX = 0, targetTiltY = 0;
-      let tiltAnim = null;
-      
-      function animateTilt() {
-        tiltX = lerp(tiltX, targetTiltX, 0.08);
-        tiltY = lerp(tiltY, targetTiltY, 0.08);
-        panel.style.transform = `perspective(600px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(-8px)`;
-        if (Math.abs(tiltX - targetTiltX) > 0.05 || Math.abs(tiltY - targetTiltY) > 0.05) {
-          tiltAnim = requestAnimationFrame(animateTilt);
-        } else { tiltAnim = null; }
-      }
-      
-      panel.addEventListener('mousemove', e => {
-        const r = panel.getBoundingClientRect();
-        targetTiltX = ((e.clientX - r.left) / r.width - .5) * 10;
-        targetTiltY = -((e.clientY - r.top) / r.height - .5) * 10;
-        if (!tiltAnim) tiltAnim = requestAnimationFrame(animateTilt);
-      });
-      panel.addEventListener('mouseleave', () => { 
-        targetTiltX = 0; targetTiltY = 0;
-        // Smooth return to origin
-        function returnToZero() {
-          tiltX = lerp(tiltX, 0, 0.06);
-          tiltY = lerp(tiltY, 0, 0.06);
-          if (Math.abs(tiltX) > 0.05 || Math.abs(tiltY) > 0.05) {
-            panel.style.transform = `perspective(600px) rotateY(${tiltX}deg) rotateX(${tiltY}deg)`;
-            requestAnimationFrame(returnToZero);
-          } else {
-            panel.style.transform = '';
-            tiltAnim = null;
-          }
-        }
-        requestAnimationFrame(returnToZero);
-      });
-    });
-
-    // PROJECT CARD 3D TILT (smooth lerp)
-    document.querySelectorAll('.project-card').forEach(card => {
-      let tiltX = 0, tiltY = 0, targetTiltX = 0, targetTiltY = 0;
-      let tiltAnim = null;
-      
-      function animateTilt() {
-        tiltX = lerp(tiltX, targetTiltX, 0.08);
-        tiltY = lerp(tiltY, targetTiltY, 0.08);
-        card.style.transform = `perspective(800px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(-6px)`;
-        if (Math.abs(tiltX - targetTiltX) > 0.05 || Math.abs(tiltY - targetTiltY) > 0.05) {
-          tiltAnim = requestAnimationFrame(animateTilt);
-        } else { tiltAnim = null; }
-      }
-      
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        targetTiltX = ((e.clientX - r.left) / r.width - .5) * 6;
-        targetTiltY = -((e.clientY - r.top) / r.height - .5) * 6;
-        if (!tiltAnim) tiltAnim = requestAnimationFrame(animateTilt);
-      });
-      card.addEventListener('mouseleave', () => { 
-        targetTiltX = 0; targetTiltY = 0;
-        function returnToZero() {
-          tiltX = lerp(tiltX, 0, 0.06);
-          tiltY = lerp(tiltY, 0, 0.06);
-          if (Math.abs(tiltX) > 0.05 || Math.abs(tiltY) > 0.05) {
-            card.style.transform = `perspective(800px) rotateY(${tiltX}deg) rotateX(${tiltY}deg)`;
-            requestAnimationFrame(returnToZero);
-          } else {
-            card.style.transform = '';
-            tiltAnim = null;
-          }
-        }
-        requestAnimationFrame(returnToZero);
-      });
-    });
+    // Achievement panels + project cards now use the shared addCardTilt()
+    // helper below (see calls after the function definition). They previously
+    // had their own copies that broke for every card except the first because
+    // of the CSS `transition: transform .5s` lagging the per-frame updates.
 
     // BENTO CARD 3D TILT (smooth lerp)
     document.querySelectorAll('.bento-card').forEach(card => {
@@ -748,6 +678,59 @@
         requestAnimationFrame(returnToZero);
       });
     });
+
+    // GENERIC CARD 3D TILT (smooth lerp) - same feel as achievement/project cards
+    function addCardTilt(selector, maxDeg, perspective, lift) {
+      document.querySelectorAll(selector).forEach(card => {
+        let tiltX = 0, tiltY = 0, targetTiltX = 0, targetTiltY = 0;
+        let tiltAnim = null;
+
+        function animateTilt() {
+          tiltX = lerp(tiltX, targetTiltX, 0.08);
+          tiltY = lerp(tiltY, targetTiltY, 0.08);
+          card.style.transform = `perspective(${perspective}px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(${lift}px)`;
+          if (Math.abs(tiltX - targetTiltX) > 0.05 || Math.abs(tiltY - targetTiltY) > 0.05) {
+            tiltAnim = requestAnimationFrame(animateTilt);
+          } else { tiltAnim = null; }
+        }
+
+        // Cards like .ach-panel / .project-card declare `transition: transform .5s`
+        // for their reveal/hover. That transition fights the per-frame tilt updates
+        // and lags so far behind that the tilt never visibly applies. Suppress it
+        // while the pointer is over the card (the rAF lerp already smooths motion);
+        // restore it once the card settles back so reveal/hover transitions return.
+        card.addEventListener('mouseenter', () => { card.style.transition = 'none'; });
+
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          targetTiltX = ((e.clientX - r.left) / r.width - .5) * maxDeg;
+          targetTiltY = -((e.clientY - r.top) / r.height - .5) * maxDeg;
+          if (!tiltAnim) tiltAnim = requestAnimationFrame(animateTilt);
+        });
+        card.addEventListener('mouseleave', () => {
+          targetTiltX = 0; targetTiltY = 0;
+          function returnToZero() {
+            tiltX = lerp(tiltX, 0, 0.06);
+            tiltY = lerp(tiltY, 0, 0.06);
+            if (Math.abs(tiltX) > 0.05 || Math.abs(tiltY) > 0.05) {
+              card.style.transform = `perspective(${perspective}px) rotateY(${tiltX}deg) rotateX(${tiltY}deg)`;
+              requestAnimationFrame(returnToZero);
+            } else {
+              card.style.transform = '';
+              card.style.transition = '';
+              tiltAnim = null;
+            }
+          }
+          requestAnimationFrame(returnToZero);
+        });
+      });
+    }
+
+    addCardTilt('.ach-panel', 10, 600, -8);
+    addCardTilt('.project-card', 6, 800, -6);
+    addCardTilt('.edu-card', 6, 700, -4);
+    addCardTilt('.skill-cluster', 6, 700, -4);
+    addCardTilt('.exp-card', 5, 1000, -4);
 
     // PARALLAX ON SCROLL (rAF-smoothed)
     const parallaxSections = document.querySelectorAll('.floating-shapes');
