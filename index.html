@@ -10,15 +10,17 @@
   <meta property="og:title" content="Athmeeya M Kashyap | Portfolio">
   <meta property="og:description"
     content="Undergraduate Researcher, CCNSB IIIT Hyderabad. Percolation Theory · INMO Qualifier.">
-  <meta property="og:image" content="https://athmeeya2006.github.io/webpage/assets/Athmeeya_Kashyap_cv.jpg">
-  <meta property="og:url" content="https://athmeeya2006.github.io/webpage/">
+  <meta property="og:image" content="https://athmeeya2006.github.io/assets/Athmeeya_Kashyap_cv.jpg">
+  <meta property="og:url" content="https://athmeeya2006.github.io/">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Athmeeya M Kashyap | Portfolio">
   <meta name="twitter:description"
     content="Undergraduate Researcher, CCNSB IIIT Hyderabad. INMO Qualifier.">
-  <meta name="twitter:image" content="https://athmeeya2006.github.io/webpage/assets/Athmeeya_Kashyap_cv.jpg">
+  <meta name="twitter:image" content="https://athmeeya2006.github.io/assets/Athmeeya_Kashyap_cv.jpg">
   <title>Athmeeya M Kashyap | Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
     rel="stylesheet">
@@ -31,7 +33,7 @@
   <canvas id="grain"></canvas>
 
   <!-- BACK TO TOP -->
-  <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button id="back-to-top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
   <!-- PRELOADER -->
   <div id="preloader">
@@ -49,21 +51,23 @@
       <li><a href="#hero">HOME</a></li>
       <li><a href="#about">ABOUT</a></li>
       <li><a href="#experience">EXPERIENCE</a></li>
+      <li><a href="#research-experience">RESEARCH</a></li>
       <li><a href="#education">EDUCATION</a></li>
       <li><a href="#skills">SKILLS</a></li>
       <li><a href="#achievements">ACHIEVEMENTS</a></li>
       <li><a href="#projects">PROJECTS</a></li>
       <li><a href="#contact">CONTACT</a></li>
     </ul>
-    <div class="nav-hamburger" id="hamburger">
+    <div class="nav-hamburger" id="hamburger" role="button" tabindex="0" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
       <span></span><span></span><span></span>
     </div>
   </nav>
   <div class="mobile-menu" id="mobileMenu">
-    <span class="mobile-close" id="mobileClose">✕</span>
+    <span class="mobile-close" id="mobileClose" role="button" tabindex="0" aria-label="Close menu">✕</span>
     <a href="#hero" onclick="closeMobile()">HOME</a>
     <a href="#about" onclick="closeMobile()">ABOUT</a>
     <a href="#experience" onclick="closeMobile()">EXPERIENCE</a>
+    <a href="#research-experience" onclick="closeMobile()">RESEARCH</a>
     <a href="#education" onclick="closeMobile()">EDUCATION</a>
     <a href="#skills" onclick="closeMobile()">SKILLS</a>
     <a href="#achievements" onclick="closeMobile()">ACHIEVEMENTS</a>
@@ -71,11 +75,13 @@
     <a href="#contact" onclick="closeMobile()">CONTACT</a>
   </div>
 
+  <main>
+
   <!-- HERO -->
   <section id="hero">
     <div class="hero-content">
-      <div class="hero-name" id="heroName"></div>
-      <div class="hero-subtitle" id="heroSubtitle"></div>
+      <h1 class="hero-name" id="heroName"></h1>
+      <p class="hero-subtitle" id="heroSubtitle"></p>
       <div class="hero-ctas">
         <a href="#about" class="btn-primary">EXPLORE →</a>
         <div class="cv-picker">
@@ -215,7 +221,7 @@
       <div class="edu-item reveal stagger-2">
         <div class="edu-empty"></div>
         <div class="edu-dot" id="dot2" style="border-color:var(--cyan);"></div>
-        <div class="edu-card" style="border-color: rgba(0,255,229,.4);">
+        <div class="edu-card" style="border-color: rgba(70, 224, 139,.4);">
           <div class="edu-degree" style="color:var(--cyan)">Higher Secondary</div>
           <div class="edu-school">CFAL</div>
           <div class="exp-period" style="margin-top:8px">2022 to 2024</div>
@@ -223,16 +229,16 @@
       </div>
 
       <div class="edu-item reveal stagger-4">
-        <div class="edu-card" style="text-align:right; border-color: rgba(0,255,229,.4);">
+        <div class="edu-card" style="text-align:right; border-color: rgba(70, 224, 139,.4);">
           <div class="edu-degree" style="color:var(--cyan)">B.Tech CS + MS Computational Natural Sciences</div>
           <div class="edu-school">IIIT Hyderabad</div>
           <div class="exp-period" style="margin-top:8px">2024 to 2029 (Expected)</div>
           <div class="edu-progress" style="margin-top:14px; text-align:left;">
-            <div style="font-size:12px; color:rgba(234,234,234,0.7); margin-bottom:8px; font-family:'Space Mono', monospace; letter-spacing:1.5px; font-weight:600;">
+            <div style="font-size:12px; color:rgba(237, 237, 234,0.7); margin-bottom:8px; font-family:'Space Mono', monospace; letter-spacing:1.5px; font-weight:600;">
               <span>DEGREE PROGRESS</span>
             </div>
-            <div style="background:rgba(255,255,255,0.05); height:10px; border-radius:5px; overflow:hidden; position:relative; border:1px solid rgba(0,255,229,0.12);">
-              <div style="width:40%; height:100%; background:linear-gradient(90deg, var(--cyan), var(--orange)); border-radius:5px; box-shadow:0 0 10px rgba(0, 255, 229, 0.4);"></div>
+            <div style="background:rgba(255,255,255,0.05); height:10px; border-radius:5px; overflow:hidden; position:relative; border:1px solid rgba(70, 224, 139,0.12);">
+              <div style="width:40%; height:100%; background:linear-gradient(90deg, var(--cyan), var(--orange)); border-radius:5px; box-shadow:0 0 10px rgba(70, 224, 139, 0.4);"></div>
             </div>
           </div>
           <div style="font-size:10px;color:var(--cyan);margin-top:6px;letter-spacing:2px">IN PROGRESS</div>
@@ -254,27 +260,27 @@
     <div class="skills-board reveal">
       <div class="skills-static-grid" aria-label="Skill categories">
         <div class="skill-cluster">
-          <div class="skill-cluster-label" style="color:#00FFE5">Languages</div>
+          <div class="skill-cluster-label" style="color:#46E08B">Languages</div>
           <div class="skills-cv-row">Python, C++, C, Golang, JavaScript, TypeScript, SQL, Bash/Shell</div>
         </div>
         <div class="skill-cluster">
-          <div class="skill-cluster-label" style="color:#FF4500">AI &amp; Machine Learning</div>
+          <div class="skill-cluster-label" style="color:#2FC474">AI &amp; Machine Learning</div>
           <div class="skills-cv-row">Deep Learning, Neural Networks, Transformers &amp; LLMs, LLM Inference &amp; Serving, KV-Cache, Model Quantization (int4), Speculative Decoding, PyTorch, Scikit-learn</div>
         </div>
         <div class="skill-cluster">
-          <div class="skill-cluster-label" style="color:#00FFE5">Quantitative Methods</div>
+          <div class="skill-cluster-label" style="color:#46E08B">Quantitative Methods</div>
           <div class="skills-cv-row">Probability, Statistical Inference, Stochastic Processes, Stochastic Volatility (Heston), Monte Carlo, Derivatives Pricing &amp; Calibration, Adjoint Algorithmic Differentiation, Game Theory (CFR/Nash), Network Analysis</div>
         </div>
         <div class="skill-cluster">
-          <div class="skill-cluster-label" style="color:#FF4500">Frameworks &amp; Libraries</div>
+          <div class="skill-cluster-label" style="color:#2FC474">Frameworks &amp; Libraries</div>
           <div class="skills-cv-row">React.js, Node.js, Express.js, FastAPI, Prisma ORM, Vite, Tailwind CSS, Socket.IO, Chart.js, NumPy, Pandas, SciPy, NetworkX, Matplotlib, pybind11, OpenCV</div>
         </div>
         <div class="skill-cluster">
-          <div class="skill-cluster-label" style="color:#00FFE5">Databases &amp; Infrastructure</div>
+          <div class="skill-cluster-label" style="color:#46E08B">Databases &amp; Infrastructure</div>
           <div class="skills-cv-row">PostgreSQL, MongoDB, MySQL, SQLite, TimescaleDB, Redis, Kafka, gRPC/Protobuf, Git, Docker, Kubernetes, AWS, Linux</div>
         </div>
         <div class="skill-cluster">
-          <div class="skill-cluster-label" style="color:#FF4500">Core Competencies</div>
+          <div class="skill-cluster-label" style="color:#2FC474">Core Competencies</div>
           <div class="skills-cv-row">Data Structures &amp; Algorithms, Distributed Systems, System Design, High-Performance Computing (SIMD/AVX2), Concurrency, REST APIs, WebSockets</div>
         </div>
       </div>
@@ -357,12 +363,12 @@
         <div class="wave-container">
           <div class="wave">
             <svg viewBox="0 0 800 60" preserveAspectRatio="none">
-              <path d="M0 30 Q100 0 200 30 T400 30 T600 30 T800 30 L800 60 L0 60Z" fill="rgba(255,69,0,0.3)" />
+              <path d="M0 30 Q100 0 200 30 T400 30 T600 30 T800 30 L800 60 L0 60Z" fill="rgba(47, 196, 116,0.3)" />
             </svg>
           </div>
           <div class="wave wave2">
             <svg viewBox="0 0 800 60" preserveAspectRatio="none">
-              <path d="M0 30 Q100 60 200 30 T400 30 T600 30 T800 30 L800 60 L0 60Z" fill="rgba(255,69,0,0.2)" />
+              <path d="M0 30 Q100 60 200 30 T400 30 T600 30 T800 30 L800 60 L0 60Z" fill="rgba(47, 196, 116,0.2)" />
             </svg>
           </div>
         </div>
@@ -398,7 +404,7 @@
         <div class="project-num">01</div>
         <div class="project-tag">Quant Systems</div>
         <div class="project-title">Heston Stochastic-Volatility Options Pricer</div>
-        <div class="project-desc">Prices options under the Heston model two ways, Fourier inversion and Monte Carlo, that agree to within Monte Carlo error and both collapse to Black-Scholes at constant volatility. Fits a live S&amp;P 500 option chain and reproduces the volatility smile a flat Black-Scholes model cannot, cutting implied-vol error from 4.65 to 0.76 vol points. Computes price and every Greek in a single reverse-mode adjoint pass, 3.9x faster than bumping each input. A small neural network returns price and nine Greeks in 18.7 microseconds at sub-1% price error, 278x faster than the full pricer.</div>
+        <div class="project-desc">Prices options under the Heston model two ways, Fourier inversion and Monte Carlo, that agree to within Monte Carlo error and both collapse to Black-Scholes at constant volatility. Fits a live S&amp;P 500 option chain and reproduces the volatility smile a flat Black-Scholes model cannot, cutting implied-vol error from 4.65 to 0.76 vol points, a 6.2x reduction. Computes price and every Greek in a single reverse-mode adjoint pass, 3.9x faster than bumping each input. A small neural network returns price and nine Greeks in 18.7 microseconds at sub-1% price error, 278x faster than the full pricer.</div>
         <div class="project-tech">
           <span>C++</span><span>Python</span><span>PyTorch</span><span>NumPy</span>
         </div>
@@ -488,7 +494,7 @@
         <div class="project-num">07</div>
         <div class="project-tag">Research</div>
         <div class="project-title">Flash Crash Dynamics in Networked Oscillators</div>
-        <div class="project-desc">A simulation framework models financial flash crashes as phase transitions in coupled oscillator networks. A C++ RK4 engine delivers a 30x speedup over the original Python integrator. This performance makes large scale parameter sweeps tractable. Recovers the theoretical critical coupling to within 2% across 525 simulations.</div>
+        <div class="project-desc">Models a financial flash crash as a desynchronization transition in a coupled-oscillator network, where the simulated onset of collapse matches the analytical critical coupling to within 2%. Variance and lag-1 autocorrelation rise sharply just before the collapse, producing an early-warning signal of an imminent crash.</div>
         <div class="project-tech">
           <span>Python</span><span>C++</span><span>SciPy</span><span>Matplotlib</span><span>NetworkX</span>
         </div>
@@ -503,7 +509,7 @@
         <div class="project-num">08</div>
         <div class="project-tag">Research</div>
         <div class="project-title">Erdos and Renyi Random Graph + Financial Contagion</div>
-        <div class="project-desc">A Monte Carlo study validates three classical phase transition scaling laws. Runs over 10,980 simulations. Implements a graph generator 1,000x faster than the naive approach. Models financial contagion on interbank networks. Shows S&amp;P 500 correlation structure deviates from a random graph null by 30 standard deviations.</div>
+        <div class="project-desc">A percolation generator recovers the Erdos-Renyi critical exponents exactly (-1.500 and -1/3) across 10,000+ graphs and scales to 1,000,000-node networks. Three interbank-contagion models (percolation, threshold cascade, and DebtRank) on 1,000-node networks show that scale-free hub networks fail at far lower stress than evenly-connected ones.</div>
         <div class="project-tech">
           <span>Python</span><span>NetworkX</span><span>SciPy</span><span>NumPy</span><span>Matplotlib</span><span>Manim</span>
         </div>
@@ -532,9 +538,9 @@
             <span>athmeeyakashyap@gmail.com</span>
             <span class="signal-ping">PING</span>
           </a>
-          <a href="https://github.com/athmeeya2006" target="_blank" rel="noopener noreferrer" class="signal-line">
+          <a href="https://github.com/Athmeeya2006" target="_blank" rel="noopener noreferrer" class="signal-line">
             <span style="color:var(--cyan);letter-spacing:3px;font-size:12px">GITHUB</span>
-            <span>github.com/athmeeya2006</span>
+            <span>github.com/Athmeeya2006</span>
             <span class="signal-ping">OPEN</span>
           </a>
           <a href="https://linkedin.com/in/athmeeya-kashyap" target="_blank" rel="noopener noreferrer" class="signal-line">
@@ -558,7 +564,7 @@
           </div>
         </div>
         <div class="social-links">
-          <a href="https://github.com/athmeeya2006" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+          <a href="https://github.com/Athmeeya2006" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
             <svg viewBox="0 0 24 24">
               <path
                 d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
@@ -575,6 +581,8 @@
       </div>
     </div>
   </section>
+
+  </main>
 
   <footer>
     <div>© 2026 ATHMEEYA M KASHYAP</div>

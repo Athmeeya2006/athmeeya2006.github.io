@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -oiE '\\(var\\\\\\(--\\(cyan|orange|white|black|dark|mid|purple|gold\\)\\\\\\)\\)|rgba?\\\\\\([0-9 ,.]+\\\\\\)|#[0-9A-Fa-f]{3,6}' index.html)",
+      "Bash(grep -oiE 'rgba?\\\\\\([0-9 ,.]+\\\\\\)|#[0-9A-Fa-f]{3,6}|var\\\\\\(--[a-z-]+\\\\\\)' projects/project-detail.css)",
+      "Bash(grep -oiE 'rgba?\\\\\\([0-9 ,.]+\\\\\\)|#[0-9A-Fa-f]{3,6}|00FFE5|FFB000' scripts.js)",
+      "Bash(python3 /tmp/claude-1000/-home-athmeeya-athmeeya2006-github-io/099b084a-277a-4bde-8c0b-b3580c6696d7/scratchpad/recolor.py styles.css projects/project-detail.css index.html scripts.js)",
+      "Bash(sort -t: -k2)",
+      "Bash(uniq -c -f1)",
+      "Bash(grep -nE \"#[0-9A-Fa-f]{6}|rgba?\\\\\\([0-9]+, *[0-9]+, *[0-9]+\" index.html)",
+      "Bash(grep -nE \"--\\(red|blue|yellow|cyan|purple|pink|amber\\):\" styles.css)",
+      "Bash(awk '/\\\\.hero-name *\\\\{/,/\\\\}/' styles.css)",
+      "Bash(awk '/\\\\.hero-subtitle *\\\\{/,/\\\\}/' styles.css)",
+      "Bash(awk '/\\\\.letter *\\\\{/,/\\\\}/' styles.css)",
+      "Bash(grep -oP \"\\(?<=<p[^>]{0,80}>\\)[^<]{40,}\" projects/heston-pricer.html)",
+      "Bash(grep -nA12 \"    .hero-name {\" styles.css)",
+      "Bash(awk '/^\\\\s*\\\\*[, ]/,/\\\\}/' styles.css)",
+      "Bash(awk '/^\\\\s*body\\\\s*\\\\{/,/\\\\}/' styles.css)",
+      "Bash(grep -nB1 \"Bebas Neue\" styles.css)",
+      "Bash(awk 'NR>=556 && NR<=566' styles.css)",
+      "Bash(awk 'NR>=893 && NR<=912' styles.css)",
+      "Bash(awk '/^\\\\s*#hero\\\\s*\\\\{/,/\\\\}/' styles.css)",
+      "Bash(awk '/\\\\.hero-content\\\\s*\\\\{/,/\\\\}/' styles.css)",
+      "Bash(awk 'NR>=478 && NR<=545 && /radial|gradient|background:/' styles.css)",
+      "Bash(grep -nA3 \"    .hero-name {\" styles.css)",
+      "Bash(grep -nA3 \"    .section-title {\" styles.css)"
+    ]
+  }
+}

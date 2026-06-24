@@ -279,7 +279,7 @@
       [24,1],   // ML Basics → Python
       [24,19],  // ML Basics → DSA (algorithms)
     ];
-    const catColors = ['#00FFE5', '#FF4500', '#8844ff', '#ffd700'];
+    const catColors = ['#6BEBA5', '#46E08B', '#2FC474', '#3F9E63'];
 
     skillNodes.forEach(n => { n.px = n.x * SW; n.py = n.y * SH; n.vx = (Math.random() - .5) * 0.15; n.vy = (Math.random() - .5) * 0.15; n.hover = false; });
     let hoverNode = null;
@@ -319,7 +319,7 @@
         skctx.beginPath();
         skctx.moveTo(na.px, na.py);
         skctx.lineTo(nb.px, nb.py);
-        skctx.strokeStyle = active ? 'rgba(0,255,229,0.5)' : 'rgba(0,255,229,0.08)';
+        skctx.strokeStyle = active ? 'rgba(70, 224, 139,0.5)' : 'rgba(70, 224, 139,0.08)';
         skctx.lineWidth = active ? 1.5 : .8;
         skctx.stroke();
       });
@@ -356,7 +356,7 @@
         // circle
         skctx.beginPath();
         skctx.arc(n.px, n.py, r, 0, Math.PI * 2);
-        skctx.fillStyle = isHov ? col + '22' : '#050508';
+        skctx.fillStyle = isHov ? col + '22' : '#060807';
         skctx.fill();
         skctx.strokeStyle = isHov ? col : col + '66';
         skctx.lineWidth = isHov ? 2 : 1;
@@ -365,13 +365,13 @@
         skctx.stroke();
         skctx.shadowBlur = 0;
         // label
-        skctx.fillStyle = isHov ? col : '#EAEAEA';
+        skctx.fillStyle = isHov ? col : '#E8EDEA';
         skctx.font = `${isHov ? 'bold ' : ''}${Math.max(10, Math.round(r * .42))}px Space Mono, monospace`;
         skctx.textAlign = 'center'; skctx.textBaseline = 'middle';
         skctx.fillText(n.label, n.px, n.py);
         if (isHov) {
           skctx.font = `11px Space Mono, monospace`;
-          skctx.fillStyle = '#EAEAEA';
+          skctx.fillStyle = '#E8EDEA';
           skctx.fillText(n.level, n.px, n.py + r + 16);
         }
       });
@@ -392,7 +392,7 @@
       function drawMatrix() {
         mctx.fillStyle = 'rgba(0,0,0,0.05)';
         mctx.fillRect(0, 0, codeC.width, codeC.height);
-        mctx.fillStyle = '#FF4500';
+        mctx.fillStyle = '#2FC474';
         mctx.font = '14px Space Mono, monospace';
         drops.forEach((y, i) => {
           const ch = Math.random() > .5 ? '1' : '0';
@@ -423,12 +423,12 @@
       [.25, .5, .75, 1].forEach(f => {
         rctx.beginPath();
         rctx.arc(CX, CY, MAX_R * f, 0, Math.PI * 2);
-        rctx.strokeStyle = 'rgba(0,255,229,0.15)';
+        rctx.strokeStyle = 'rgba(70, 224, 139,0.15)';
         rctx.lineWidth = 1;
         rctx.stroke();
       });
       // crosshair
-      rctx.strokeStyle = 'rgba(0,255,229,0.1)';
+      rctx.strokeStyle = 'rgba(70, 224, 139,0.1)';
       rctx.beginPath(); rctx.moveTo(CX, 20); rctx.lineTo(CX, RH - 20); rctx.stroke();
       rctx.beginPath(); rctx.moveTo(20, CY); rctx.lineTo(RW - 20, CY); rctx.stroke();
       // sweep
@@ -437,7 +437,7 @@
       rctx.translate(CX, CY);
       rctx.rotate(radarAngle);
       const sg = rctx.createLinearGradient(0, 0, MAX_R, 0);
-      sg.addColorStop(0, 'rgba(0,255,229,0.8)');
+      sg.addColorStop(0, 'rgba(70, 224, 139,0.8)');
       sg.addColorStop(1, 'transparent');
       rctx.beginPath();
       rctx.moveTo(0, 0);
@@ -456,11 +456,11 @@
         const by = CY + Math.sin(b.angle) * MAX_R * b.dist;
         rctx.beginPath();
         rctx.arc(bx, by, 4, 0, Math.PI * 2);
-        rctx.fillStyle = `rgba(0,255,229,${fade})`;
-        rctx.shadowBlur = 10; rctx.shadowColor = '#00FFE5';
+        rctx.fillStyle = `rgba(70, 224, 139,${fade})`;
+        rctx.shadowBlur = 10; rctx.shadowColor = '#46E08B';
         rctx.fill();
         rctx.shadowBlur = 0;
-        rctx.fillStyle = `rgba(0,255,229,${fade * .7})`;
+        rctx.fillStyle = `rgba(70, 224, 139,${fade * .7})`;
         rctx.font = '12px Space Mono, monospace';
         rctx.fillText(b.label, bx + 8, by + 4);
       });
@@ -477,7 +477,7 @@
       hero: 'hero',
       about: 'about',
       experience: 'experience',
-      'research-experience': 'experience',
+      'research-experience': 'research-experience',
       education: 'education',
       skills: 'skills',
       achievements: 'achievements',
@@ -523,9 +523,20 @@
     }, { passive: true });
 
     // MOBILE MENU
-    document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.add('open'));
+    const hamburgerEl = document.getElementById('hamburger');
+    function openMobile() {
+      document.getElementById('mobileMenu').classList.add('open');
+      hamburgerEl.setAttribute('aria-expanded', 'true');
+    }
+    hamburgerEl.addEventListener('click', openMobile);
     document.getElementById('mobileClose').addEventListener('click', closeMobile);
-    function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+    function closeMobile() {
+      document.getElementById('mobileMenu').classList.remove('open');
+      hamburgerEl.setAttribute('aria-expanded', 'false');
+    }
+    // keyboard support for the role="button" controls
+    hamburgerEl.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openMobile(); } });
+    document.getElementById('mobileClose').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); closeMobile(); } });
 
     // FILM GRAIN
     const grainC = document.getElementById('grain');
