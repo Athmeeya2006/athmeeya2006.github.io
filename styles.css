@@ -427,7 +427,9 @@
     .mobile-menu {
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, .97);
+      background: rgba(239, 235, 223, .98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       z-index: 10000;
       align-items: center;
       justify-content: center;

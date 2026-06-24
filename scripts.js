@@ -622,6 +622,8 @@
         btn.style.transform = `translate(${btnX}px, ${btnY}px)`;
         if (Math.abs(btnX - targetX) > 0.1 || Math.abs(btnY - targetY) > 0.1) {
           btnAnimId = requestAnimationFrame(animateBtn);
+        } else {
+          btnAnimId = null;
         }
       }
       
@@ -637,49 +639,13 @@
       });
     });
 
-    // Achievement panels + project cards now use the shared addCardTilt()
-    // helper below (see calls after the function definition). They previously
-    // had their own copies that broke for every card except the first because
-    // of the CSS `transition: transform .5s` lagging the per-frame updates.
-
-    // BENTO CARD 3D TILT (smooth lerp)
-    document.querySelectorAll('.bento-card').forEach(card => {
-      let tiltX = 0, tiltY = 0, targetTiltX = 0, targetTiltY = 0;
-      let tiltAnim = null;
-      
-      function animateTilt() {
-        tiltX = lerp(tiltX, targetTiltX, 0.08);
-        tiltY = lerp(tiltY, targetTiltY, 0.08);
-        card.style.transform = `perspective(600px) rotateY(${tiltX}deg) rotateX(${tiltY}deg) translateY(-4px)`;
-        if (Math.abs(tiltX - targetTiltX) > 0.05 || Math.abs(tiltY - targetTiltY) > 0.05) {
-          tiltAnim = requestAnimationFrame(animateTilt);
-        } else { tiltAnim = null; }
-      }
-      
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        targetTiltX = ((e.clientX - r.left) / r.width - .5) * 5;
-        targetTiltY = -((e.clientY - r.top) / r.height - .5) * 5;
-        if (!tiltAnim) tiltAnim = requestAnimationFrame(animateTilt);
-      });
-      card.addEventListener('mouseleave', () => { 
-        targetTiltX = 0; targetTiltY = 0;
-        function returnToZero() {
-          tiltX = lerp(tiltX, 0, 0.06);
-          tiltY = lerp(tiltY, 0, 0.06);
-          if (Math.abs(tiltX) > 0.05 || Math.abs(tiltY) > 0.05) {
-            card.style.transform = `perspective(600px) rotateY(${tiltX}deg) rotateX(${tiltY}deg)`;
-            requestAnimationFrame(returnToZero);
-          } else {
-            card.style.transform = '';
-            tiltAnim = null;
-          }
-        }
-        requestAnimationFrame(returnToZero);
-      });
-    });
-
-    // GENERIC CARD 3D TILT (smooth lerp) - same feel as achievement/project cards
+    // 3D TILT for every card type, via one shared helper.
+    // Each card declares `transition: transform ...` for its reveal/hover, and that
+    // transition fights the per-frame rAF tilt and lags it into near-invisibility.
+    // The helper suppresses the transition while the pointer is over the card, then
+    // restores it once the card settles, so the tilt is responsive on EVERY card
+    // (achievements + projects included, not just the first). No `.bento-card`
+    // exists in the markup, so it is intentionally not wired up.
     function addCardTilt(selector, maxDeg, perspective, lift) {
       document.querySelectorAll(selector).forEach(card => {
         let tiltX = 0, tiltY = 0, targetTiltX = 0, targetTiltY = 0;
