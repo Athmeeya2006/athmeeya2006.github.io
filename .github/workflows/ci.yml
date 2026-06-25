@@ -30,8 +30,9 @@ jobs:
         # positives while still catching real HTML/CSS mistakes:
         #   - inset / backdrop-filter / aspect-ratio / scrollbar-* : valid CSS
         #     properties the checker doesn't recognise.
-        #   - linear-gradient "too few values" : raised because the checker
-        #     can't resolve CSS custom properties, e.g. var(--cyan).
+        #   - linear-gradient / radial-gradient "too few values" : raised because
+        #     the checker can't resolve CSS custom properties, e.g. var(--cyan),
+        #     so it sees the gradient's colour stops as empty.
         run: |
           html5validator --root . --also-check-css \
             --ignore-re \
@@ -40,7 +41,8 @@ jobs:
               'CSS: "scrollbar-width"' \
               'CSS: "scrollbar-color"' \
               'CSS: "aspect-ratio"' \
-              'too few values for the property "linear-gradient"'
+              'too few values for the property "linear-gradient"' \
+              'too few values for the property "radial-gradient"'
 
   link-check:
     name: Check internal links
