@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description"
-    content="Flash Crash Dynamics in Networked Oscillators. Simulation framework for phase transitions in coupled oscillator networks. C++ RK4 engine with a 30x speedup.">
+    content="Flash Crash Dynamics in Networked Oscillators. Simulation framework for phase transitions in coupled oscillator networks, with a C++ RK4 integration engine.">
   <title>Flash Crash Dynamics | Athmeeya M Kashyap</title>
   <link
     href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap"
@@ -45,7 +45,7 @@
 
     <section class="detail-section">
       <h2 class="detail-section-title">What It Does</h2>
-      <p>A simulation framework models financial flash crashes as phase transitions in coupled oscillator networks. A C++ RK4 engine delivers a 30x speedup over the original Python integrator. This performance makes large scale parameter sweeps tractable. Recovers the theoretical critical coupling to within 2% across 525 simulations.</p>
+      <p>A simulation framework models financial flash crashes as phase transitions in coupled oscillator networks. The ODE integration runs in a C++ RK4 engine, which keeps large scale parameter sweeps tractable. Recovers the theoretical critical coupling to within 2% across 525 simulations.</p>
       <p>It treats a synchronized market as a network of Kuramoto and Stuart-Landau oscillators, where a flash crash is an abrupt drop in coupling. The question it asks is whether the network recovers coherence after such a drop and how fast.</p>
     </section>
 
@@ -53,7 +53,7 @@
       <h2 class="detail-section-title">How It Works</h2>
 
       <div class="detail-subsection">A C++ Integration Engine</div>
-      <p>The core ODE integration loop runs in C++ with a fixed step RK4 engine over sparse adjacency lists. A single simulation of 400 oscillators dropped from 4.5 seconds in Python and SciPy to 0.15 seconds, a 30x speedup, which brings the full parameter sweep down to about 80 seconds. Sparse lists hold memory and access time to linear rather than quadratic.</p>
+      <p>The core ODE integration loop runs in C++ with a fixed step RK4 engine over sparse adjacency lists. A single simulation of 400 oscillators runs in about 0.15 seconds, which brings the full parameter sweep down to about 80 seconds. Sparse lists hold memory and access time to linear rather than quadratic.</p>
 
       <div class="detail-subsection">Two Models, Two Topologies</div>
       <p>Kuramoto oscillators track phase, while Stuart-Landau oscillators track complex amplitude and capture amplitude death. The framework compares Erdos-Renyi and Barabasi-Albert networks. Coherence collapses gradually on ER networks because no hubs anchor synchrony, while hubs hold synchrony longer on BA networks and then fail faster and more completely.</p>
@@ -64,7 +64,7 @@
 
     <section class="detail-section">
       <h2 class="detail-section-title">Results</h2>
-      <p>The C++ engine is 30x faster than the Python integrator, completing the full sweep in about 80 seconds. The empirical steady state order parameter converges to within 2% of the theoretical critical coupling across 525 simulations, and the phase diagram locates the transition boundary sharply.</p>
+      <p>The C++ engine completes the full sweep in about 80 seconds. The empirical steady state order parameter converges to within 2% of the theoretical critical coupling across 525 simulations, and the phase diagram locates the transition boundary sharply.</p>
     </section>
 
     <section class="detail-section">

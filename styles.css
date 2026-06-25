@@ -1292,6 +1292,24 @@
       margin-bottom: 16px;
     }
 
+    .exp-repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--accent);
+      text-decoration: none;
+      margin: 2px 0 20px;
+      transition: gap .25s ease, opacity .25s ease;
+    }
+
+    .exp-repo-link:hover {
+      gap: 12px;
+      opacity: .75;
+    }
+
     .exp-bullets {
       list-style: none;
       padding: 0;
