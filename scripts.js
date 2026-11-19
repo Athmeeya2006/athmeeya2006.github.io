@@ -230,11 +230,11 @@
         const by = CY + Math.sin(b.angle) * MAX_R * b.dist;
         rctx.beginPath();
         rctx.arc(bx, by, 4, 0, Math.PI * 2);
-        rctx.fillStyle = `rgba(242, 58, 0,${fade})`;
-        rctx.shadowBlur = 0; rctx.shadowColor = '#F23A00';
+        rctx.fillStyle = `rgba(20, 18, 14,${fade})`;
+        rctx.shadowBlur = 0; rctx.shadowColor = '#16140E';
         rctx.fill();
         rctx.shadowBlur = 0;
-        rctx.fillStyle = `rgba(242, 58, 0,${fade * .7})`;
+        rctx.fillStyle = `rgba(20, 18, 14,${fade * .7})`;
         rctx.font = '12px Space Mono, monospace';
         rctx.fillText(b.label, bx + 8, by + 4);
       });

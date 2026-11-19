@@ -18,13 +18,13 @@
       --text-muted:     #656049;
       --text-faint:     #9A9382;
 
-      /* vermilion - the only accent */
-      --accent:         #F23A00;
-      --accent-hover:   #FF5526;
-      --accent-active:  #C72E00;
-      --accent-ink:     #FFF1EC;
-      --accent-subtle:  #FBE6DD;
-      --accent-border:  #F0C3B2;
+      /* black ink - the only accent */
+      --accent:         #16140E;
+      --accent-hover:   #3D392F;
+      --accent-active:  #000000;
+      --accent-ink:     #F7F4EC;
+      --accent-subtle:  #E7E2D4;
+      --accent-border:  #CFC8B6;
 
       /* accent kept under old --amber* names for compatibility */
       --amber:          var(--accent);
@@ -40,8 +40,8 @@
       --status:         #8C8473;
 
       /* utilities */
-      --focus:          rgba(242, 58, 0, 0.40);
-      --selection:      rgba(242, 58, 0, 0.18);
+      --focus:          rgba(20, 18, 14, 0.40);
+      --selection:      rgba(20, 18, 14, 0.18);
       --glow:           none;
       --shadow-sm:      0 1px 2px rgba(20, 18, 14, 0.06);
       --shadow-md:      0 8px 30px rgba(20, 18, 14, 0.10);
